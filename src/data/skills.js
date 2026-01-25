@@ -1,0 +1,37 @@
+export const skills = [
+  // Technical Skills
+  "JavaScript (ES6+)",
+  "HTML5",
+  "CSS3",
+  "Responsive Web Design",
+  "Tailwind CSS",
+  "React",
+  "Component-Based Architecture",
+  "State Management",
+  "REST APIs",
+  "JSON",
+  "Git & GitHub",
+  "Version Control",
+  "Debugging",
+  "Performance Optimization",
+  "Accessibility (a11y)",
+  "Cross-Browser Compatibility",
+  "Basic Backend Knowledge",
+  "Problem Solving",
+  "Data Structures Fundamentals",
+  "Algorithmic Thinking",
+
+  // Soft Skills
+  "Communication",
+  "Team Collaboration",
+  "Time Management",
+  "Critical Thinking",
+  "Adaptability",
+  "Attention to Detail",
+  "Self-Learning",
+  "Creativity",
+  "User-Centered Thinking",
+  "Accountability",
+  "Consistency",
+  "Work Ethic"
+];
