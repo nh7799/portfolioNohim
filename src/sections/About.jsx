@@ -18,7 +18,7 @@ export default function About() {
   return (
     <>
       <Layout
-        className="flex md:flex-row md:gap-10 items-center justify-center flex-col"
+        className="flex md:flex-row md:gap-15 items-center justify-center flex-col"
         sectionName={"About"}
         id={"about"}
       >
@@ -45,7 +45,7 @@ export default function About() {
             impactful, real-world solutions.
           </Paragraph>
         </div>
-        <div className="card-comp md:flex-2 order-1 md:order-2 bg-accent p-4 border rounded-lg">
+        <div className="max-w-fit card-comp md:flex-2 order-1 md:order-2 p-4 border rounded-lg">
           <p className="bg-primaryGreen-lime w-fit mb-2 text-accent p-2 px-3 rounded">
             <Icon name={"info"} className="mr-2"></Icon>
             Current status : {new Date().getFullYear()}

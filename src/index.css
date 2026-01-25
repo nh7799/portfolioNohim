@@ -78,12 +78,27 @@ button {
   filter: blur(40px);
 } */
 .card-comp {
-  background: rgba(255, 255, 255, 0.341);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(224, 223, 223, 0.461)
+  );
   backdrop-filter: blur(10px);
   border: none;
   box-shadow: 0px 0px 5px 0px #00000047;
 }
-.skills-box{
-  background-color: rgba(255, 255, 255, 0.519);
+.skills-box {
+  background-color: rgba(255, 255, 255, 0.579);
   backdrop-filter: blur(100px);
+}
+.hero-comp {
+  position: relative;
+}
+.hero-comp::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
 }
