@@ -80,16 +80,25 @@ button {
 .card-comp {
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.4),
-    rgba(224, 223, 223, 0.461)
+    rgba(255, 255, 255, 0.204),
+    rgba(255, 255, 255, 0.167)
   );
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(140px);
   border: none;
   box-shadow: 0px 0px 5px 0px #00000047;
 }
 .skills-box {
   background-color: rgba(255, 255, 255, 0.579);
-  backdrop-filter: blur(100px);
+  /* backdrop-filter: blur(10px); */
+}
+body {
+  /* background-image:
+    linear-gradient(to bottom, rgb(0, 1, 9), rgba(3, 3, 9, 0.755)),
+    url("./assets/lucid.jpg"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-blend-mode:hard-light;
 }
 .hero-comp {
   position: relative;
@@ -101,4 +110,7 @@ button {
   top: 0;
   width: 10px;
   height: 10px;
+}
+.footer{
+  background: #ffffff2b;
 }

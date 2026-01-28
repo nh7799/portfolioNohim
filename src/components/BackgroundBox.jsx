@@ -15,7 +15,21 @@ export default function BackgroundBox({
       )}
     >
       {icon && <span className="mr-1 text-2xl">{icon}</span>}
-      <span> {isLink ? <a href={isLink}>{text}</a> : text}</span>
+      <span>
+        {" "}
+        {isLink ? (
+          <a
+            href={isLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Opens in a new tab"
+          >
+            {text}
+          </a>
+        ) : (
+          text
+        )}
+      </span>
     </div>
   );
 }

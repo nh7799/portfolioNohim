@@ -11,7 +11,8 @@ export default function Hero() {
           <div className="">
             {" "}
             <h1 className="md:text-6xl font-bold text-4xl">
-              Hello world, I am Nohim and i am Just curious.
+              Hello world, I am Nohim and i really want to make a difference.
+              <Icon name={"code"}></Icon>
               <Icon></Icon>
             </h1>
           </div>
@@ -51,14 +52,14 @@ export default function Hero() {
             ></BackgroundBox>
           </div>
           <div>
-            <Button className="">
+            <Button className="bg-primaryGreen text-accent">
               <Icon name={"at"} className=""></Icon>
               Contact Me
             </Button>
           </div>
         </div>
         <div className="flex image order-1 md:order-2 md:flex-2 items-center justify-center">
-          <div className="rounded-full grayscale contrast-150 profile-image w-50 h-50 md:w-100 md:h-100">
+          <div className="rounded-full grayscale contrast-150 profile-image w-50 h-50 lg:w-100 lg:h-100 md:w-70 md:h-70">
             {" "}
           </div>
         </div>

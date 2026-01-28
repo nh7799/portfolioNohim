@@ -1,6 +1,7 @@
 import Layout from "./Layout";
 import { skills } from "../data/skills";
 import BackgroundBox from "../components/BackgroundBox";
+import Game from "../components/Game";
 
 export default function Skills() {
   return (
@@ -13,6 +14,9 @@ export default function Skills() {
               className="text-nowrap skills-box text-deep"
             ></BackgroundBox>
           ))}
+        </div>
+        <div>
+          <Game></Game>
         </div>
       </Layout>
     </>

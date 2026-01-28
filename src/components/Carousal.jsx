@@ -17,6 +17,8 @@ export default function Carousal({ data = [] }) {
     scrollIntoView(scrollRef.current[index], {
       boundary: container,
       behavior: "smooth",
+      inline:"center",
+      block:"nearest"
     });
   }
 
@@ -52,7 +54,7 @@ export default function Carousal({ data = [] }) {
           />
         </div>
         <div
-          className="p-5 flex gap-2 md:gap-4 overflow-x-scroll px-10 "
+          className="flex gap-2 md:gap-4 overflow-x-scroll p-10 "
           ref={containerRef}
           style={{
             overflowX: "auto",
@@ -68,14 +70,14 @@ export default function Carousal({ data = [] }) {
               <>
                 <div
                   key={i}
-                  className={`${i !== activeSlide ? "flex-wrap opacity-40 blur-xs pointer-events-none" : "opacity-100 scale-105"} box-content mx-2 card-comp z-20 shadow-xl flex flex-col gap-3 h-auto min-w-90 bg-accent m-3 p-4 rounded-lg border transition-all`}
+                  className={`${i !== activeSlide ? " opacity-40 pointer-events-none" : "opacity-100 scale-105"} w-[28rem]  mx-2 card-comp z-20 shadow-xl flex flex-col gap-3 bg-accent m-3 p-4 rounded-lg border transition-all`}
                   ref={(el) => (scrollRef.current[i] = el)}
                 >
                   {" "}
                   <h2 className="font-extrabold md:text-xl">{title}</h2>
                   {{ imageUrl } && (
                     <div
-                      className={`bg-no-repeat bg-cover bg-center rounded-sm w-full h-50`}
+                      className={`bg-no-repeat bg-cover bg-center rounded-sm w-full aspect-video`}
                       style={{ backgroundImage: `url(${imageUrl})` }}
                     ></div>
                   )}

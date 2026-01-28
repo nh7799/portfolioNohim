@@ -14,6 +14,8 @@ import {
   faCircleArrowLeft,
   faCircleArrowRight,
   faPlay,
+  faSmile,
+  faCode,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGit,
@@ -35,4 +37,5 @@ export const icons = {
   leftArrow: faCircleArrowLeft,
   rightArrow: faCircleArrowRight,
   play: faPlay,
+  code:faCode
 };

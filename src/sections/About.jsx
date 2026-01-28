@@ -22,7 +22,7 @@ export default function About() {
         sectionName={"About"}
         id={"about"}
       >
-        <div className="md:flex-3 order-2 md:order-1">
+        <div className="md:flex-2 order-2 md:order-1">
           {" "}
           <Paragraph>
             i'm a passionate and curious problem-solver with a keen interest in
@@ -45,7 +45,7 @@ export default function About() {
             impactful, real-world solutions.
           </Paragraph>
         </div>
-        <div className="max-w-fit card-comp md:flex-2 order-1 md:order-2 p-4 border rounded-lg">
+        <div className="max-w-300 card-comp md:flex-2 order-1 md:order-2 p-4 border rounded-lg">
           <p className="bg-primaryGreen-lime w-fit mb-2 text-accent p-2 px-3 rounded">
             <Icon name={"info"} className="mr-2"></Icon>
             Current status : {new Date().getFullYear()}
