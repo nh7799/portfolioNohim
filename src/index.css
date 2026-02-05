@@ -78,27 +78,26 @@ button {
   filter: blur(40px);
 } */
 .card-comp {
-  background: linear-gradient(
+  /* background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0.204),
     rgba(255, 255, 255, 0.167)
   );
-  backdrop-filter: blur(140px);
-  border: none;
+  backdrop-filter: blur(140px); */
   box-shadow: 0px 0px 5px 0px #00000047;
 }
 .skills-box {
-  background-color: rgba(255, 255, 255, 0.579);
+  /* background-color: rgba(255, 255, 255, 0.579); */
   /* backdrop-filter: blur(10px); */
 }
 body {
   /* background-image:
     linear-gradient(to bottom, rgb(0, 1, 9), rgba(3, 3, 9, 0.755)),
-    url("./assets/lucid.jpg"); */
+    url("./assets/lucid.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  background-blend-mode:hard-light;
+  background-blend-mode:hard-light; */
 }
 .hero-comp {
   position: relative;
@@ -111,6 +110,6 @@ body {
   width: 10px;
   height: 10px;
 }
-.footer{
-  background: #ffffff2b;
+.footer {
+  /* border-top: 1px dotted #3e3e3e; */
 }

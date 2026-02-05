@@ -16,16 +16,21 @@ import {
   faPlay,
   faSmile,
   faCode,
+  faDotCircle,
+  faPlus,
+  faContactCard,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGit,
   faGithub,
+  faGooglePlusG,
   faLinkedin,
+  faTelegram,
 } from "@fortawesome/free-brands-svg-icons";
 
 export const icons = {
   coffee: faCoffee,
-  at: faAt,
+  at: faContactCard,
   check: faCheck,
   home: faHome,
   user: faCircleUser,
@@ -37,5 +42,7 @@ export const icons = {
   leftArrow: faCircleArrowLeft,
   rightArrow: faCircleArrowRight,
   play: faPlay,
-  code:faCode
+  code:faCode,
+  dot:faDotCircle,
+  plus:faArrowRight
 };

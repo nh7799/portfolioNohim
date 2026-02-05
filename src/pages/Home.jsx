@@ -8,12 +8,12 @@ import Skills from "../sections/Skills";
 export default function Home() {
   return (
     <>
-      <div className="w-full h-full ">
+      <div className="w-full h-full max-w-500">
         <Hero></Hero>
         <About></About>
         <Projects></Projects>
         <Skills></Skills>
-        <Contact></Contact>
+        {/* <Contact></Contact> */}
       </div>
     </>
   );

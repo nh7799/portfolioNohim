@@ -1,10 +1,11 @@
 import { twMerge } from "tailwind-merge";
 
-export default function Button({ className, children }) {
+export default function Button({ className, children, onClick }) {
   return (
     <button
+      onClick={onClick}
       className={twMerge(
-        "border border-deep shadow-lg bg-accent p-3 rounded-lg text-deep hover:bg-amber-500 transition-all ",
+        "border shadow-lg  p-3 rounded-lg  transition-all ",
         className,
       )}
     >

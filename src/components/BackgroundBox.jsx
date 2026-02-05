@@ -10,7 +10,7 @@ export default function BackgroundBox({
   return (
     <div
       className={twMerge(
-        `${backgroundColor || "bg-deep"}  shadow-sm flex justify-center items-center px-3 py-2 rounded-sm font-bold text-light w-fit p-2 hover:opacity-80 ${isLink ? "cursor-pointer" : null}`,
+        `${backgroundColor || ""} border border-gray-600 shadow-sm flex justify-center items-center px-3 py-2 rounded-sm font-bold w-fit p-2 hover:opacity-80 ${isLink ? "cursor-pointer" : null}`,
         className,
       )}
     >

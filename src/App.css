@@ -2,12 +2,32 @@
 @plugin "daisyui";
 @config "../tailwind.config.js";
 
+:root {
+  --bg: #fffffff1;
+  --surface: #f8fafc;
+  --muted: #64748b;
+  --border: #e6eef8;
+  --ring: #c7d2fe;
+  --focus: #334155;
+  --text: #0f172a;
+}
+
+.dark {
+  --bg: #0b1220;
+  --surface: #0f1724;
+  --muted: #94a3b8;
+  --border: #1f2937;
+  --ring: #5b21b6;
+  --focus: #e6edf3;
+  --text: #e6eef8;
+}
+
 #root {
   /* max-width: 1280px; */
   /* margin: 0 auto; */
   /* padding: 2rem; */
   /* text-align: center; */
-  font-family: "Outfit";
+  font-family: "IBM Plex Sans", serif;
 }
 
 .logo {
@@ -38,4 +58,8 @@
 
 .read-the-docs {
   color: #888;
+}
+p {
+  font-weight: 100;
+  line-height: 1.5;
 }

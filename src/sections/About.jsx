@@ -18,35 +18,37 @@ export default function About() {
   return (
     <>
       <Layout
-        className="flex md:flex-row md:gap-15 items-center justify-center flex-col"
+        className="flex gap-5 md:flex-row md:gap-15 items-center justify-center flex-col"
         sectionName={"About"}
         id={"about"}
       >
         <div className="md:flex-2 order-2 md:order-1">
           {" "}
           <Paragraph>
-            i'm a passionate and curious problem-solver with a keen interest in
-            technology, design, and innovation.
-          </Paragraph>
-          <Paragraph className="">
-            I thrive on creating solutions that are not only functional but also
-            intuitive and engaging. With a strong foundation in [web
-            development, electronics, or design],
+            I’m a passionate and curious problem-solver with a strong interest
+            in technology, design, and innovation.
           </Paragraph>
           <Paragraph>
-            I enjoy tackling challenges that push me to learn and grow
-            continuously. I believe in the power of creativity and precision
-            working together—whether it’s building a sleek interface, developing
-            a microcontroller project, or crafting a seamless user experience.
+            I enjoy building solutions that are functional, intuitive, and
+            engaging, with experience in web development, electronics, and
+            system design.
           </Paragraph>
           <Paragraph>
-            Outside of work, I’m constantly exploring new ideas, honing my
-            skills, and looking for opportunities to turn concepts into
-            impactful, real-world solutions.
+            I focus on writing clean, efficient, and maintainable code while
+            paying close attention to user experience and visual clarity.
           </Paragraph>
+          <Paragraph>
+            I enjoy tackling complex problems, debugging systems, and breaking
+            challenges down into clear, logical steps.
+          </Paragraph>
+          <Paragraph>
+            I’m motivated by continuous learning and regularly explore new
+            tools, frameworks, and technologies to expand my skill set.
+          </Paragraph>
+         
         </div>
-        <div className="max-w-300 card-comp md:flex-2 order-1 md:order-2 p-4 border rounded-lg">
-          <p className="bg-primaryGreen-lime w-fit mb-2 text-accent p-2 px-3 rounded">
+        <div className="max-w-300 card-comp md:flex-2 order-1 md:order-2 p-4 border border-gray-600 rounded-lg">
+          <p className="w-fit mb-2 p-2 rounded">
             <Icon name={"info"} className="mr-2"></Icon>
             Current status : {new Date().getFullYear()}
           </p>
@@ -63,6 +65,8 @@ export default function About() {
             );
           })}
         </div>
+        
+
       </Layout>
     </>
   );

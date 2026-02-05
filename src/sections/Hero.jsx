@@ -10,7 +10,7 @@ export default function Hero() {
           {" "}
           <div className="">
             {" "}
-            <h1 className="md:text-6xl font-bold text-4xl">
+            <h1 className="md:text-4xl font-bold text-2xl">
               Hello world, I am Nohim and i really want to make a difference.
               <Icon name={"code"}></Icon>
               <Icon></Icon>
@@ -36,6 +36,7 @@ export default function Hero() {
           <div className="flex gap-2">
             <BackgroundBox
               backgroundColor="bg-blue-600"
+              className="text-white"
               text={"LinkedIn"}
               icon={<Icon name={"linkedIn"}></Icon>}
               isLink={
@@ -44,6 +45,7 @@ export default function Hero() {
             ></BackgroundBox>
             <BackgroundBox
               backgroundColor="bg-gray-900"
+              className="text-white"
               text={"GitHub"}
               icon={<Icon name={"github"}></Icon>}
               isLink={
@@ -52,10 +54,10 @@ export default function Hero() {
             ></BackgroundBox>
           </div>
           <div>
-            <Button className="bg-primaryGreen text-accent">
-              <Icon name={"at"} className=""></Icon>
+            {/* <Button className="">
+              <Icon name={"at"} className="mx-1"></Icon>
               Contact Me
-            </Button>
+            </Button> */}
           </div>
         </div>
         <div className="flex image order-1 md:order-2 md:flex-2 items-center justify-center">

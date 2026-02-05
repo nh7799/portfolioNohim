@@ -1,7 +1,8 @@
 import { useRef } from "react";
 
-export default function NavComp({ target, id, text, icon }) {
+export default function NavComp({ target, id, text, icon, onClick }) {
   function handleClick(e) {
+    onClick();
     e.preventDefault();
     const element = useRef(target);
     if (element) {

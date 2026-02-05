@@ -70,8 +70,9 @@ export default function Carousal({ data = [] }) {
               <>
                 <div
                   key={i}
-                  className={`${i !== activeSlide ? " opacity-40 pointer-events-none" : "opacity-100 scale-105"} w-[28rem]  mx-2 card-comp z-20 shadow-xl flex flex-col gap-3 bg-accent m-3 p-4 rounded-lg border transition-all`}
+                  className={`${i !== activeSlide ? " opacity-30 grayscale pointer-events-none" : "shadow-2xl opacity-100 scale-105"} flex-1 mx-2  card-comp z-20 shadow-xl flex flex-col gap-3 p-3 rounded-lg border border-gray-600 transition-all`}
                   ref={(el) => (scrollRef.current[i] = el)}
+                  style={{ minWidth: "350px" }} 
                 >
                   {" "}
                   <h2 className="font-extrabold md:text-xl">{title}</h2>
@@ -87,7 +88,7 @@ export default function Carousal({ data = [] }) {
                       <TechStackBox>{item}</TechStackBox>
                     ))}
                   </div>
-                  <Button className="w-fit p-2 rounded-sm bg-primaryGreen-lime text-accent hover:bg-deep border-0">
+                  <Button className="w-fit p-2 rounded-sm  border-0 shadow-none">
                     <Icon name={"play"} className="mr-2"></Icon>
                     <a href={projectLink}>See More Details</a>
                   </Button>
