@@ -8,6 +8,7 @@ export default function Contact() {
           <fieldset>
             <label htmlFor="name">Name</label>
             <input type="text" id="name" placeholder="Enter Your Name"/>
+            
           </fieldset>
         </div>
       </Layout>

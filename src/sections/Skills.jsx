@@ -3,16 +3,31 @@ import { skills } from "../data/skills";
 import BackgroundBox from "../components/BackgroundBox";
 import Game from "../components/Game";
 import Paragraph from "../components/Paragraph";
+import { useEffect, useState } from "react";
 
+const num = 100;
+let direction = true;
 export default function Skills() {
+  const [pos, setPos] = useState(0);
+  
+  useEffect(() => {
+    const intervl = setInterval(() => {
+      setPos(prev => prev === window.innerWidth ? -window.innerWidth: prev + 1);
+    }, 140);
+
+  }, []);
+
   return (
     <>
       <Layout
         id={"Skills"}
         sectionName={"Skills"}
-        className="flex flex-col gap-8 p-5"
+        className={`flex flex-col gap-8 p-5`}
       >
-        <div className="flex gap-5 flex-wrap">
+        <div
+          className={`flex gap-5 flex-wrap transition-transform`}
+          style={{ transform: `translateX(${pos}px)` }}
+        >
           {skills.map((item) => (
             <BackgroundBox
               backgroundColor={"inherit"}

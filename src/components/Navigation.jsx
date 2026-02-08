@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import Icon from "./Icon";
 import NavComp from "./NavComp";
 
 export default function Navigation() {
-   const[lightMode,setLightMode] = useState(true)
+  const [lightMode, setLightMode] = useState(false);
+  useEffect(
+    () =>
+      lightMode
+        ? document.documentElement.classList.remove("dark")
+        : document.documentElement.classList.add("dark"),
+    [lightMode],
+  );
   return (
     <>
       <div className="flex border-b border-b-border flex-col items-center w-full my-4 font-bold min-[950px]:flex-row  p-3">
@@ -14,22 +21,28 @@ export default function Navigation() {
             className="font-extrabold text-2xl text-center"
           >
             Nohim.h
+            <sup>
+              {" "}
+              <p className="inline text-lime-400 text-sm">ver 1.0</p>
+            </sup>
             <br></br>
             <p className="text-lg">
               <Button
                 className="border-0 m-0 p-0 shadow-none"
-                onClick={() =>
-                  document.documentElement.classList.remove("dark")
-                }
+                onClick={() => setLightMode(true)}
               >
-                LightMode
+                <span className={`${lightMode ? "text-2xl" : null}`}>
+                  LightMode
+                </span>
               </Button>{" "}
-               <span className="mx-2">|</span> 
+              <span className="mx-2">|</span>
               <Button
                 className="border-0 m-0 p-0 shadow-none"
-                onClick={() => document.documentElement.classList.add("dark")}
+                onClick={() => setLightMode(false)}
               >
-                DarkMode
+                <span className={`${!lightMode ? "text-2xl" : null}`}>
+                  DarkMode
+                </span>
               </Button>
             </p>
           </h1>

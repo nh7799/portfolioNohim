@@ -19,6 +19,11 @@ import {
   faDotCircle,
   faPlus,
   faContactCard,
+  faCircleCheck,
+  faCircle,
+  faCircleNodes,
+  faChair,
+  faArrowAltCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGit,
@@ -27,6 +32,7 @@ import {
   faLinkedin,
   faTelegram,
 } from "@fortawesome/free-brands-svg-icons";
+import { faLine } from "@fortawesome/free-brands-svg-icons/faLine";
 
 export const icons = {
   coffee: faCoffee,
@@ -42,7 +48,7 @@ export const icons = {
   leftArrow: faCircleArrowLeft,
   rightArrow: faCircleArrowRight,
   play: faPlay,
-  code:faCode,
-  dot:faDotCircle,
-  plus:faArrowRight
+  code: faCode,
+  dot: faDotCircle,
+  plus: faPlus,
 };

@@ -11,7 +11,7 @@ export default function Hero() {
           <div className="">
             {" "}
             <h1 className="md:text-4xl font-bold text-2xl">
-              Hello world, I am Nohim and i really want to make a difference.
+              Hello world, I am Nohim and i really want to make a difference, and i am aware that it is always up to me.
               <Icon name={"code"}></Icon>
               <Icon></Icon>
             </h1>

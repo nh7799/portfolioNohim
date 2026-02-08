@@ -70,7 +70,7 @@ export default function Carousal({ data = [] }) {
               <>
                 <div
                   key={i}
-                  className={`${i !== activeSlide ? " opacity-30 grayscale pointer-events-none" : "shadow-2xl opacity-100 scale-105"} flex-1 mx-2  card-comp z-20 shadow-xl flex flex-col gap-3 p-3 rounded-lg border border-gray-600 transition-all`}
+                  className={`${i !== activeSlide ? " opacity-30 grayscale pointer-events-none" : "shadow-2xl opacity-100 scale-95 md:scale-105"} flex-1 mx-2  card-comp z-20 shadow-xl flex flex-col gap-3 p-3 rounded-lg border border-gray-600 transition-all`}
                   ref={(el) => (scrollRef.current[i] = el)}
                   style={{ minWidth: "350px" }} 
                 >
