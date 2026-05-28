@@ -1,52 +1,45 @@
-import pomodoro from "../../src/assets/pomodoro.jpeg";
 import robot from "../../src/assets/robot.jpeg";
 import max7219 from "../../src/assets/max7219.jpeg";
-import pomodoro from "../../src/assets/pomodoro.jpeg"
+import pomodoro from "../../src/assets/pomodoro.jpeg";
+import validationDashboard from "../../src/assets/validationEmbedded.png";
 
 export const projectCards = [
   {
     id: 1,
-    title: "Personal Portfolio Website",
+    title: "Embedded Validation Dashboard",
     description:
-      "A fully responsive and performance-optimized portfolio website designed to present projects, skills, and experience with a clean UI and modern layout.",
-    techStack: ["HTML", "CSS", "JavaScript", "TailwindCSS", "React"],
-    imageUrl: "src/assets/portfolio.png",
-    projectLink: "https://yourwebsite.com",
+      "A React-based engineering dashboard that displays simulated firmware validation runs, device status, pass/fail results, logs, and failure summaries. Built to demonstrate software tooling, data visualisation, and test-result analysis.",
+    techStack: ["React", "Vite", "JavaScript", "Tailwind CSS", "Simulated Test Data"],
+    imageUrl: validationDashboard,
+    projectLink: "https://github.com/nh7799",
   },
   {
     id: 2,
-    title: "Pomodoro Timer App",
+    title: "PCB-Based AI Agent",
     description:
-      "A productivity-focused Pomodoro timer application featuring configurable sessions, persistent state using local storage, and a minimal distraction-free interface.",
-    techStack: ["JavaScript", "React", "TailwindCSS", "LocalStorage"],
+      "An embedded AI project that translates grid-world agent logic into a physical microcontroller-based prototype using a custom PCB, OLED output, and MicroPython firmware.",
+    techStack: ["MicroPython", "Python", "PCB Design", "OLED", "Embedded AI", "Grid worlds"],
     imageUrl: pomodoro,
-    projectLink: "https://yourpomodoroapp.com",
+    projectLink:
+      "https://www.linkedin.com/in/nohim-hasitha-weedagama-arachchi/details/projects/",
   },
   {
     id: 3,
     title: "Smart Robot Controller",
     description:
-      "An embedded system project implementing intelligent motion control, sensor integration, and real-time decision-making on an RP2040-based robot platform.",
-    techStack: ["Arduino", "C++", "MicroPython", "RP2040", "Sensors"],
-    imageUrl: "src/assets/robot.jpeg",
-    projectLink: "https://github.com/username/smart-robot",
+      "An autonomous robot controller using sensor input and microcontroller logic to detect obstacles, make movement decisions, and control hardware outputs in real time.",
+    techStack: ["MicroPython", "Raspberry Pi Pico", "Sensors", "Robotics"],
+    imageUrl: robot,
+    projectLink:
+      "https://www.linkedin.com/in/nohim-hasitha-weedagama-arachchi/details/projects/",
   },
   {
     id: 4,
-    title: "MAX7219 LED Display Driver",
+    title: "MAX7219 Display Driver",
     description:
-      "A custom software SPI driver for controlling MAX7219-based seven-segment displays, developed for Raspberry Pi Pico with efficient timing and data handling.",
-    techStack: ["Python", "MicroPython", "RP2040", "MAX7219"],
-    imageUrl: "src/assets/max7219.jpeg",
-    projectLink: "https://github.com/username/max7219-display",
-  },
-  {
-    id: 5,
-    title: "Custom PCB Soldering Iron",
-    description:
-      "A hardware design project focused on reliability and longevity, featuring a custom PCB, MOSFET-based power control, and a DC ceramic heating element.",
-    techStack: ["Electronics Design", "PCB", "MOSFET", "DC Heater"],
-    imageUrl: "src/assets/soldering.png",
-    projectLink: "https://github.com/username/custom-soldering-iron",
+      "A microcontroller display-control project using software SPI to drive MAX7219 seven-segment displays, focusing on timing, data transfer, debugging, and hardware-software integration.",
+    techStack: ["MicroPython", "Raspberry Pi Pico", "MAX7219", "Software SPI"],
+    imageUrl: max7219,
+    projectLink: "https://github.com/nh7799",
   },
 ];

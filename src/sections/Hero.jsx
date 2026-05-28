@@ -11,7 +11,8 @@ export default function Hero() {
           <div className="">
             {" "}
             <h1 className="md:text-4xl font-bold text-2xl">
-              Hello world, I am Nohim and i really want to make a difference, and i am aware that it is always up to me.
+              Hello world, I am Nohim and i really want to make a difference,
+              and i am aware that it is always up to me.
               <Icon name={"code"}></Icon>
               <Icon></Icon>
             </h1>
@@ -19,11 +20,14 @@ export default function Hero() {
           <div className="text-2xl font-light">
             {" "}
             <p className="text-xl md:text-2xl">
-              hello, i am currently studying at university of hertfordshire, as
-              a Level 5 student. i am seeking placement year in 2026. i am
-              really passionate about programming, problem solving and designing
-              websites. if you are interested in my work just send me a quick
-              message and i will definitely get into it right away!!
+              I am a Level 5 Computer Science student at the University of
+              Hertfordshire, seeking a 2026 placement year opportunity in
+              software engineering, technology, or related roles. I enjoy
+              solving problems, building practical software projects, and
+              creating reliable, user-focused applications. **I have full right
+              to work in the UK for a placement year.** If my skills or projects
+              are relevant to your team, I would be happy to connect and discuss
+              potential opportunities.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

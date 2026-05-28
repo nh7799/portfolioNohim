@@ -4,16 +4,14 @@ import Paragraph from "../components/Paragraph";
 import Layout from "./Layout";
 
 const profile = {
-  name: "Nohim",
-  title: "Computer Science Student",
-  focus: "Embedded systems and low-level software",
-  education: "BSc Computer Science (Level 5), University of Hertfordshire",
-  skills: "Java, Python, JavaScript, React, React Native",
-  tools: "Arduino, MicroPython, CircuitPython, Git",
-  projects: "Microcontroller-based Pomodoro Timer; RP2040 Smart Robot",
-  location: "United Kingdom",
+  name: "Nohim Hasitha",
+  title: "Computer Science Student | Software Engineering Placement Candidate",
+  focus: "Embedded software validation, automation tools, AI, and engineering dashboards",
+  education: "BSc Computer Science Level 5, University of Hertfordshire",
+  tools: "MicroPython, Raspberry Pi Pico, ESP32/Arduino, GitHub, Vite, SQLite/PostgreSQL",
+  projects: "Embedded Validation Dashboard; PCB-Based AI Agent; Obstacle-Avoidance Robot",
+  location: "Colombo, Sri Lanka | Willing to relocate to the UK for a 9–12 month placement",
 };
-
 export default function About() {
   return (
     <>

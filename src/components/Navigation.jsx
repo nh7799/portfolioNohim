@@ -20,7 +20,7 @@ export default function Navigation() {
             aria-describedby="Logo"
             className="font-extrabold text-2xl text-center"
           >
-            Nohim.h
+            <a href="/">Nohim.h</a>
             <sup>
               {" "}
               <p className="inline text-lime-400 text-sm">ver 1.0</p>
