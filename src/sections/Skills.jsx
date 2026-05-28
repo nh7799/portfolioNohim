@@ -25,8 +25,7 @@ export default function Skills() {
         className={`flex flex-col gap-8 p-5`}
       >
         <div
-          className={`flex gap-5 flex-wrap transition-transform`}
-          style={{ transform: `translateX(${pos}px)` }}
+          className={`flex gap-5 flex-wrap `}
         >
           {skills.map((item) => (
             <BackgroundBox

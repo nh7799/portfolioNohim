@@ -1,3 +1,8 @@
+import pomodoro from "../../src/assets/pomodoro.jpeg";
+import robot from "../../src/assets/robot.jpeg";
+import max7219 from "../../src/assets/max7219.jpeg";
+import pomodoro from "../../src/assets/pomodoro.jpeg"
+
 export const projectCards = [
   {
     id: 1,
@@ -14,7 +19,7 @@ export const projectCards = [
     description:
       "A productivity-focused Pomodoro timer application featuring configurable sessions, persistent state using local storage, and a minimal distraction-free interface.",
     techStack: ["JavaScript", "React", "TailwindCSS", "LocalStorage"],
-    imageUrl: "src/assets/pomodoro.jpeg",
+    imageUrl: pomodoro,
     projectLink: "https://yourpomodoroapp.com",
   },
   {
