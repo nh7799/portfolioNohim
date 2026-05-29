@@ -19,13 +19,13 @@ function formatLabel(key) {
 export default function About() {
   return (
     <Layout
-      className="grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12"
+      className="grid items-start gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12"
       sectionName="About"
       id="about"
     >
       <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm sm:p-7">
         <Paragraph>
-          I’m a passionate and curious problem-solver with a strong interest in technology, design, and innovation.
+          I'm a passionate and curious problem-solver with a strong interest in technology, design, and innovation.
         </Paragraph>
         <Paragraph>
           I enjoy building solutions that are functional, intuitive, and engaging, with experience in web development, electronics, and system design.
@@ -37,7 +37,7 @@ export default function About() {
           I enjoy tackling complex problems, debugging systems, and breaking challenges down into clear, logical steps.
         </Paragraph>
         <Paragraph>
-          I’m motivated by continuous learning and regularly explore new tools, frameworks, and technologies to expand my skill set.
+          I'm motivated by continuous learning and regularly explore new tools, frameworks, and technologies to expand my skill set.
         </Paragraph>
       </div>
 
@@ -49,11 +49,11 @@ export default function About() {
 
         <dl className="divide-y divide-[var(--border)]">
           {Object.entries(profile).map(([key, value]) => (
-            <div key={key} className="grid gap-1 py-4 sm:grid-cols-[0.45fr_1fr] sm:gap-4">
-              <dt className="text-sm font-extrabold uppercase tracking-wide text-[var(--muted)]">
+            <div key={key} className="flex flex-col gap-1 py-3 sm:grid sm:grid-cols-[0.45fr_1fr] sm:gap-4 sm:py-4">
+              <dt className="text-xs font-extrabold uppercase tracking-wide text-[var(--muted)] sm:text-sm">
                 {formatLabel(key)}
               </dt>
-              <dd className="text-sm font-medium leading-7 text-[var(--text)] sm:text-base">
+              <dd className="text-sm font-medium leading-6 text-[var(--text)] sm:leading-7">
                 {value}
               </dd>
             </div>

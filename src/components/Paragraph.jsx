@@ -2,11 +2,11 @@ import Icon from "./Icon";
 
 export default function Paragraph({ className = "", children }) {
   return (
-    <div className={`my-4 flex gap-3 text-base font-medium sm:text-lg ${className}`}>
-      <span className="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--accent)]">
+    <div className={`my-3 flex gap-3 text-sm font-medium sm:my-4 sm:text-base lg:text-lg ${className}`}>
+      <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--accent)] sm:h-7 sm:w-7">
         <Icon name="plus" />
       </span>
-      <p>{children}</p>
+      <p className="text-sm sm:text-base lg:text-lg">{children}</p>
     </div>
   );
 }

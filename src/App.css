@@ -84,7 +84,7 @@ p {
 
 .profile-image {
   background-image: url("./assets/IMG_0885.jpeg");
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -103,8 +103,17 @@ p {
 }
 
 .hero-comp {
-  min-height: calc(100svh - 5rem);
+  min-height: calc(100svh - 4rem);
   position: relative;
+}
+
+/* Mobile: don't force full viewport height */
+@media (max-width: 639px) {
+  .hero-comp {
+    min-height: auto;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
 }
 
 .card-comp,
@@ -131,7 +140,12 @@ p {
 .react-pdf__Page canvas {
   max-width: 100% !important;
   height: auto !important;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+/* Ensure touch scrolling works smoothly */
+* {
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (prefers-reduced-motion: reduce) {
