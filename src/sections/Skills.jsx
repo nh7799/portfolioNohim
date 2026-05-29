@@ -9,11 +9,11 @@ export default function Skills() {
       title="Skills"
       intro="Grouped by area. Depth comes from projects and coursework — see GitHub and CV for detail."
     >
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="skills-grid">
         {skillGroups.map(({ title, items }) => (
-          <div key={title} className="panel p-5">
-            <h3 className="text-sm font-semibold text-text">{title}</h3>
-            <ul className="mt-3 flex flex-wrap gap-1.5">
+          <div key={title} className="skill-card panel p-5">
+            <h3>{title}</h3>
+            <ul className="project-tags">
               {items.map((skill) => (
                 <li key={skill}>
                   <span className="tag">{skill}</span>

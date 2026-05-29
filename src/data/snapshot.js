@@ -17,7 +17,13 @@ export const recruiterSnapshot = [
   },
   {
     label: "Core stack",
-    value: "Java, Python, JavaScript, React, Linux, embedded (MicroPython / Pico)",
+    value:
+      "Java, Python, JavaScript, React, AI (grid worlds), Linux, embedded (MicroPython / Pico)",
+  },
+  {
+    label: "Academic highlights",
+    value:
+      "100% Java OOP individual coursework · 84.5% AI module (84% final exam) · 95% Java group project · 88% algorithms",
   },
   {
     label: "Evidence",

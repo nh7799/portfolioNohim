@@ -10,7 +10,7 @@ export default function Projects() {
       title="Selected projects"
       intro="Each entry states the problem, what I shipped, how to verify it, and why it is relevant to engineering teams."
     >
-      <div>
+      <div className="projects-list">
         {projectCards.map((project) => (
           <ProjectCard key={project.id} {...project} />
         ))}

@@ -25,10 +25,59 @@
   --accent-foreground: #ffffff;
 
   --header-height: 3.5rem;
-  --page-width: 42rem;
-  --page-width-wide: 52rem;
-  --section-gap: clamp(4rem, 10vw, 6rem);
+
+  /* Content & header scale independently — content stays readable, header gets room for nav */
+  --layout-content: min(100% - 2.5rem, 38rem);
+  --layout-header: min(100% - 2rem, 38rem);
+  --layout-pad-inline: clamp(1.25rem, 4vw, 2rem);
+
+  --page-width: 38rem;
+  --page-width-wide: var(--layout-content);
+  --text-measure: min(100%, 36rem);
+  --section-gap: clamp(2.75rem, 5vw, 4rem);
   --radius: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --layout-content: min(100% - 3rem, 40rem);
+    --layout-header: min(100% - 3rem, 40rem);
+    --text-measure: min(100%, 38rem);
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --layout-content: min(100% - 4rem, 42rem);
+    --layout-header: min(100% - 4rem, 42rem);
+    --text-measure: min(100%, 40rem);
+    --layout-pad-inline: clamp(1.5rem, 4vw, 2.25rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --layout-content: clamp(42rem, 44vw, 48rem);
+    --layout-header: min(100% - 3rem, 72rem);
+    --text-measure: min(100%, 44rem);
+    --layout-pad-inline: clamp(1.75rem, 3vw, 2.5rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --layout-content: clamp(48rem, 42vw + 8rem, 56rem);
+    --layout-header: min(100% - 4rem, 84rem);
+    --text-measure: min(100%, 48rem);
+  }
+}
+
+@media (min-width: 1536px) {
+  :root {
+    --layout-content: clamp(52rem, 38vw + 10rem, 60rem);
+    --layout-header: min(100% - 5rem, 92rem);
+    --text-measure: min(100%, 52rem);
+  }
 }
 
 .dark {

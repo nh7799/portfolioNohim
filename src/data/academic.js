@@ -10,12 +10,12 @@ export const academicItems = [
   {
     label: "Relevant study",
     value:
-      "Object-oriented programming (Java), algorithms, networking, operating systems concepts, software engineering practice",
+      "Java OOP, artificial intelligence (grid worlds, Python), algorithms and data structures, networking, software engineering practice",
   },
   {
     label: "Applied work",
     value:
-      "Module and personal projects in web (React), Python tooling, embedded systems, and AI coursework",
+      "Module and personal projects in web (React), Python and AI coursework, embedded systems, and team software delivery",
   },
   {
     label: "Location",
