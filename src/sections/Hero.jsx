@@ -5,7 +5,7 @@ import Icon from "../components/Icon";
 export default function Hero() {
   return (
     <>
-      <div className="hero-comp flex flex-col md:flex-row h-full">
+      <div className="hero-comp flex flex-col lg:flex-row h-full">
         <div className="hero-none-graphic flex hero-text order-2 md:order-1 md:flex-3  justify-center p-10 md:p-15 flex-col gap-10">
           {" "}
           <div className="">
