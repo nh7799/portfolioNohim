@@ -9,41 +9,59 @@ export default function ProjectCard({
 }) {
   return (
     <article className="project-card">
-      {imageUrl && (
-        <div
-          className="project-image"
-          style={{ backgroundImage: `url(${imageUrl})` }}
-          role="img"
-          aria-label={`${title} screenshot`}
-        />
-      )}
-      <div className="p-5 sm:p-6">
-        <h3 className="text-base font-semibold text-text sm:text-lg">{title}</h3>
+      <div className="project-card-top">
+        {imageUrl && (
+          <div className="project-thumb-wrap">
+            <img
+              src={imageUrl}
+              alt=""
+              className="project-thumb"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        )}
+        <div className="project-card-intro">
+          <h3>{title}</h3>
+        </div>
+      </div>
 
-        <p className="project-meta">Problem</p>
-        <p className="project-body">{problem}</p>
+      <div className="project-card-body">
+        <div className="project-field">
+          <p className="project-meta">Problem</p>
+          <p className="project-body">{problem}</p>
+        </div>
 
-        <p className="project-meta">What I built</p>
-        <p className="project-body">{built}</p>
+        <div className="project-field">
+          <p className="project-meta">What I built</p>
+          <p className="project-body">{built}</p>
+        </div>
 
-        <p className="project-meta">Tech stack</p>
-        <ul className="mt-1 flex flex-wrap gap-1.5">
-          {techStack.map((item) => (
-            <li key={item}>
-              <span className="tag">{item}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="project-field">
+          <p className="project-meta">Tech stack</p>
+          <ul className="project-tags">
+            {techStack.map((item) => (
+              <li key={item}>
+                <span className="tag">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        <p className="project-meta">Proof</p>
-        <p className="project-body">
-          <a href={proof.href} target="_blank" rel="noopener noreferrer">
-            {proof.label} →
-          </a>
-        </p>
-
-        <p className="project-meta">Why it matters</p>
-        <p className="project-body">{recruiterValue}</p>
+        <div className="project-field project-field-split">
+          <div>
+            <p className="project-meta">Proof</p>
+            <p className="project-body">
+              <a href={proof.href} target="_blank" rel="noopener noreferrer">
+                {proof.label} →
+              </a>
+            </p>
+          </div>
+          <div>
+            <p className="project-meta">Why it matters</p>
+            <p className="project-body">{recruiterValue}</p>
+          </div>
+        </div>
       </div>
     </article>
   );

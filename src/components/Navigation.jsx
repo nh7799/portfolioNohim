@@ -41,7 +41,7 @@ export default function Navigation() {
     <>
       <header className="site-header">
         <div className="site-header-inner">
-          <a href="/" className="site-logo">
+          <a href="#home" className="site-logo" title="Nohim Hasitha">
             Nohim Hasitha
           </a>
 
@@ -58,9 +58,12 @@ export default function Navigation() {
                 href={heroLinks.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline"
+                className="btn btn-outline btn-icon-only btn-github"
+                aria-label="GitHub profile"
+                title="GitHub"
               >
-                GitHub
+                <Icon name="github" />
+                <span className="btn-github-label">GitHub</span>
               </a>
             </div>
 
