@@ -5,7 +5,7 @@ import Layout from "./Layout";
 
 export default function Skills() {
   return (
-    <Layout id="skills" sectionName="Skills" className="space-y-6 sm:space-y-8">
+    <Layout id="skills" sectionName="Skills" className="space-y-5 sm:space-y-6">
       <div className="card-comp rounded-3xl p-4 sm:p-7">
         <div className="flex flex-wrap gap-2 sm:gap-3">
           {skills.map((item) => (
@@ -13,13 +13,13 @@ export default function Skills() {
               key={item}
               backgroundColor="bg-[var(--surface-strong)]"
               text={item}
-              className="skills-box text-xs sm:text-sm"
+              className="skills-box"
             />
           ))}
         </div>
       </div>
 
-      <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
         <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-7">
           <Paragraph>
             I am a versatile web developer with strong expertise in JavaScript (ES6+), HTML5, CSS3, and responsive design, complemented by modern frameworks like Tailwind CSS and React. I specialize in component-based architecture, state management, and building user-centric interfaces, while integrating REST APIs and handling JSON data efficiently. Proficient with Git & GitHub version control, I ensure collaborative workflows are smooth, maintainable, and well-documented.

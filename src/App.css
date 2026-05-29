@@ -64,11 +64,7 @@ a {
   text-decoration: none;
 }
 
-button,
-a,
-input,
-textarea,
-select {
+button, a, input, textarea, select {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -107,12 +103,12 @@ p {
   position: relative;
 }
 
-/* Mobile: don't force full viewport height */
-@media (max-width: 639px) {
+/* No forced viewport height on phones — content determines height */
+@media (max-width: 767px) {
   .hero-comp {
     min-height: auto;
     padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+    padding-bottom: 3rem;
   }
 }
 
@@ -143,15 +139,8 @@ p {
   border-radius: 0.5rem;
 }
 
-/* Ensure touch scrolling works smoothly */
-* {
-  -webkit-overflow-scrolling: touch;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;

@@ -19,7 +19,7 @@ function formatLabel(key) {
 export default function About() {
   return (
     <Layout
-      className="grid items-start gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12"
+      className="grid items-start gap-6 md:grid-cols-[1.05fr_0.95fr] md:gap-10"
       sectionName="About"
       id="about"
     >
@@ -49,11 +49,11 @@ export default function About() {
 
         <dl className="divide-y divide-[var(--border)]">
           {Object.entries(profile).map(([key, value]) => (
-            <div key={key} className="flex flex-col gap-1 py-3 sm:grid sm:grid-cols-[0.45fr_1fr] sm:gap-4 sm:py-4">
-              <dt className="text-xs font-extrabold uppercase tracking-wide text-[var(--muted)] sm:text-sm">
+            <div key={key} className="flex flex-col gap-1 py-3 sm:grid sm:grid-cols-[7rem_1fr] sm:gap-3 sm:py-4">
+              <dt className="text-xs font-extrabold uppercase tracking-wide text-[var(--muted)]">
                 {formatLabel(key)}
               </dt>
-              <dd className="text-sm font-medium leading-6 text-[var(--text)] sm:leading-7">
+              <dd className="text-sm font-medium leading-6 text-[var(--text)] break-words">
                 {value}
               </dd>
             </div>
