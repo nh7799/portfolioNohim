@@ -1,7 +1,8 @@
 html,
 body {
-  overflow-x: clip;
+  overflow-x: hidden;
   max-width: 100%;
+  margin: 0;
 }
 
 .skip-link {
@@ -50,18 +51,23 @@ button {
   width: 100%;
   max-width: var(--layout-content);
   margin-inline: auto;
-  padding-inline: var(--layout-pad-inline);
-  padding-bottom: max(3rem, env(safe-area-inset-bottom));
+  padding-left: var(--layout-pad-left);
+  padding-right: var(--layout-pad-right);
+  padding-bottom: max(3rem, env(safe-area-inset-bottom, 0px));
   min-width: 0;
 }
 
 .page-main {
-  padding-top: calc(var(--header-height) + 1.5rem);
+  padding-top: calc(
+    var(--header-height) + env(safe-area-inset-top, 0px) + 1.5rem
+  );
 }
 
 @media (min-width: 768px) {
   .page-main {
-    padding-top: calc(var(--header-height) + 2.5rem);
+    padding-top: calc(
+      var(--header-height) + env(safe-area-inset-top, 0px) + 2.5rem
+    );
   }
 }
 
@@ -72,11 +78,13 @@ button {
   left: 0;
   right: 0;
   z-index: 50;
-  height: var(--header-height);
+  box-sizing: border-box;
+  height: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
   border-bottom: 1px solid var(--border);
   background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
   backdrop-filter: blur(8px);
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 .site-header-inner {
@@ -84,11 +92,12 @@ button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  height: 100%;
+  height: var(--header-height);
   width: 100%;
   max-width: var(--layout-header);
   margin-inline: auto;
-  padding-inline: var(--layout-pad-inline);
+  padding-left: var(--layout-pad-left);
+  padding-right: var(--layout-pad-right);
   min-width: 0;
 }
 
@@ -241,7 +250,9 @@ button {
   width: min(100%, 18rem);
   height: 100dvh;
   padding: 1.25rem;
-  padding-top: max(1.25rem, env(safe-area-inset-top));
+  padding-top: max(1.25rem, env(safe-area-inset-top, 0px));
+  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
   background: var(--bg-elevated);
   border-left: 1px solid var(--border);
   transform: translateX(100%);
@@ -410,7 +421,9 @@ button {
 /* ——— Sections ——— */
 .section {
   padding-block: var(--section-gap);
-  scroll-margin-top: calc(var(--header-height) + 1rem);
+  scroll-margin-top: calc(
+    var(--header-height) + env(safe-area-inset-top, 0px) + 1rem
+  );
   border-top: 1px solid var(--border);
 }
 
@@ -936,6 +949,7 @@ button {
 
 .pdf-shell {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }

@@ -32,10 +32,12 @@
 
   --header-height: 3.5rem;
 
-  /* Content & header scale independently — content stays readable, header gets room for nav */
-  --layout-content: min(100% - 2.5rem, 38rem);
-  --layout-header: min(100% - 2rem, 38rem);
-  --layout-pad-inline: clamp(1.25rem, 4vw, 2rem);
+  /* Content max-width — padding handles edge inset; no width subtraction (fixes iOS centering) */
+  --layout-content: 38rem;
+  --layout-header: 38rem;
+  --layout-pad-inline: 1.25rem;
+  --layout-pad-left: max(var(--layout-pad-inline), env(safe-area-inset-left, 0px));
+  --layout-pad-right: max(var(--layout-pad-inline), env(safe-area-inset-right, 0px));
 
   --page-width: 38rem;
   --page-width-wide: var(--layout-content);
@@ -53,43 +55,45 @@
 
 @media (min-width: 640px) {
   :root {
-    --layout-content: min(100% - 3rem, 40rem);
-    --layout-header: min(100% - 3rem, 40rem);
+    --layout-content: 40rem;
+    --layout-header: 40rem;
     --text-measure: min(100%, 38rem);
   }
 }
 
 @media (min-width: 768px) {
   :root {
-    --layout-content: min(100% - 4rem, 42rem);
-    --layout-header: min(100% - 4rem, 42rem);
+    --layout-content: 42rem;
+    --layout-header: 42rem;
     --text-measure: min(100%, 40rem);
-    --layout-pad-inline: clamp(1.5rem, 4vw, 2.25rem);
+    --layout-pad-inline: 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   :root {
     --layout-content: clamp(42rem, 44vw, 48rem);
-    --layout-header: min(100% - 3rem, 72rem);
+    --layout-header: 72rem;
     --text-measure: min(100%, 44rem);
-    --layout-pad-inline: clamp(1.75rem, 3vw, 2.5rem);
+    --layout-pad-inline: 1.75rem;
   }
 }
 
 @media (min-width: 1280px) {
   :root {
     --layout-content: clamp(48rem, 42vw + 8rem, 56rem);
-    --layout-header: min(100% - 4rem, 84rem);
+    --layout-header: 84rem;
     --text-measure: min(100%, 48rem);
+    --layout-pad-inline: 2rem;
   }
 }
 
 @media (min-width: 1536px) {
   :root {
     --layout-content: clamp(52rem, 38vw + 10rem, 60rem);
-    --layout-header: min(100% - 5rem, 92rem);
+    --layout-header: 92rem;
     --text-measure: min(100%, 52rem);
+    --layout-pad-inline: 2.25rem;
   }
 }
 
@@ -125,10 +129,18 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  width: 100%;
   min-height: 100%;
+  margin: 0;
   background-color: var(--bg);
   background-image: var(--bg-gradient);
-  background-attachment: fixed;
+  background-attachment: scroll;
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  html {
+    background-attachment: fixed;
+  }
 }
 
 html.dark {
@@ -142,7 +154,9 @@ html.dark {
 }
 
 body {
+  width: 100%;
   min-height: 100dvh;
+  margin: 0;
   background: transparent;
   color: var(--text);
   transition:
@@ -151,6 +165,9 @@ body {
 }
 
 #root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.65;
