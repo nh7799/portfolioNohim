@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <>
       <div className="hero-comp flex flex-col lg:flex-row h-full">
-        <div className="hero-none-graphic flex hero-text order-2 md:order-1 md:flex-3  justify-center p-10 md:p-15 flex-col gap-10">
+        <div className="hero-none-graphic flex hero-text order-2 lg:order-1 md:order-1 md:flex-3  justify-center p-10 md:p-15 flex-col gap-10">
           {" "}
           <div className="">
             {" "}
@@ -64,7 +64,7 @@ export default function Hero() {
             </Button> */}
           </div>
         </div>
-        <div className="flex image order-1 md:order-2 md:flex-2 items-center justify-center">
+        <div className="flex image order-1 lg:order-2 md:order-2 md:flex-2 items-center justify-center">
           <div className="rounded-full grayscale contrast-150 profile-image w-50 h-50 lg:w-100 lg:h-100 md:w-70 md:h-70">
             {" "}
           </div>
