@@ -14,7 +14,7 @@ export default function Navigation() {
   );
   return (
     <>
-      <div className="flex border-b border-b-border flex-col items-center w-full my-4 font-bold min-[950px]:flex-row  p-3">
+      <div className="flex border-b border-b-border flex-col items-center w-full my-4 font-bold md:flex-row  p-3">
         <div className="flex  items-center justify-center md:flex-1">
           <h1
             aria-describedby="Logo"
