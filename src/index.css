@@ -42,6 +42,7 @@ button {
   width: 100%;
   min-height: 100dvh;
   overflow-x: clip;
+  background: transparent;
 }
 
 .page-inner {

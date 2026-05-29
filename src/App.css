@@ -11,6 +11,12 @@
   --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
 
   --bg: #f9fafb;
+  --bg-gradient: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f9fafb 48%,
+    #f3f4f6 100%
+  );
   --bg-elevated: #ffffff;
   --surface: #f3f4f6;
   --text: #111827;
@@ -88,7 +94,14 @@
 }
 
 .dark {
-  --bg: #0f1117;
+  --bg: #0c0e13;
+  --bg-gradient: linear-gradient(
+    168deg,
+    #161a24 0%,
+    #12151d 38%,
+    #0f1117 68%,
+    #0a0c11 100%
+  );
   --bg-elevated: #181b24;
   --surface: #222733;
   --text: #f3f4f6;
@@ -112,6 +125,10 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  min-height: 100%;
+  background-color: var(--bg);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
 }
 
 html.dark {
@@ -125,11 +142,12 @@ html.dark {
 }
 
 body {
-  background: var(--bg);
+  min-height: 100dvh;
+  background: transparent;
   color: var(--text);
   transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 #root {

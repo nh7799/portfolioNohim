@@ -14,7 +14,7 @@ export default function Footer() {
         {" · "}
         <a href={heroLinks.cv}>CV (PDF)</a>
       </p>
-      <p className="mt-4">© {new Date().getFullYear()}</p>
+      <p className="mt-4">© {new Date().getFullYear()} Nohim Hasitha.<br></br> All rights reserved.</p>
     </footer>
   );
 }
