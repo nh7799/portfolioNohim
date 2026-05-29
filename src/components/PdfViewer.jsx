@@ -15,29 +15,26 @@ export default function PdfViewer({ file }) {
   const [width, setWidth] = useState(0);
   const [numPages, setNumPages] = useState(null);
 
-  const pdfFile = useMemo(() => {
-    // If a local/manual file is passed, use that first
-    if (file) {
-      return file;
-    }
+  const pdfFile =
+    useMemo(() => {
+      if (file) return file;
 
-    // If no local file is passed, use Supabase
-    if (!hasSupabaseConfig || !supabase) {
-      console.error("Supabase is not configured correctly.");
-      return null;
-    }
+      if (!hasSupabaseConfig || !supabase) {
+        return null;
+      }
 
-    const { data } = supabase.storage.from("cv").getPublicUrl("latest-cv.pdf");
+      const { data } = supabase.storage
+        .from("cv")
+        .getPublicUrl("latest-cv.pdf");
 
-    return `${data.publicUrl}?v=${Date.now()}`;
-  }, [file]);
+      return `${data.publicUrl}?v=${Date.now()}`;
+    }, [file]) || "/Nohim-hasitha-cv.pdf";
 
   useEffect(() => {
     if (!containerRef.current) return;
 
     const resizeObserver = new ResizeObserver((entries) => {
-      const containerWidth = entries[0].contentRect.width;
-      setWidth(containerWidth);
+      setWidth(entries[0].contentRect.width);
     });
 
     resizeObserver.observe(containerRef.current);
@@ -52,8 +49,8 @@ export default function PdfViewer({ file }) {
   if (!pdfFile) {
     return (
       <div className="w-full rounded-xl border border-red-300 bg-red-50 p-4 text-red-700">
-        CV could not load. Supabase environment variables are missing or
-        incorrect.
+        CV could not load because Supabase environment variables are missing on
+        Vercel.
       </div>
     );
   }

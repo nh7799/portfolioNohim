@@ -2,6 +2,7 @@ import { supabase } from "../lib/supabaseClient";
 import Button from "./Button";
 
 export default function DownloadCVButton({ className }) {
+  if (!supabase) return;
   const { data } = supabase.storage.from("cv").getPublicUrl("latest-cv.pdf");
 
   return (
