@@ -1,4 +1,3 @@
-import Navigation from "../components/Navigation";
 import About from "../sections/About";
 import Contact from "../sections/Contact";
 import Hero from "../sections/Hero";
@@ -9,7 +8,7 @@ import Skills from "../sections/Skills";
 export default function Home() {
   return (
     <main className="min-h-screen w-full overflow-x-hidden">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
         <Hero />
         <About />
         <Projects />

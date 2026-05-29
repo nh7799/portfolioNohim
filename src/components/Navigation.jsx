@@ -5,78 +5,61 @@ import NavComp from "./NavComp";
 
 export default function Navigation() {
   const [lightMode, setLightMode] = useState(false);
-  useEffect(
-    () =>
-      lightMode
-        ? document.documentElement.classList.remove("dark")
-        : document.documentElement.classList.add("dark"),
-    [lightMode],
-  );
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", !lightMode);
+  }, [lightMode]);
+
+  const navItems = [
+    { text: "Home", id: "#home", icon: <Icon name="home" /> },
+    { text: "About", id: "#about", icon: <Icon name="user" /> },
+    { text: "Projects", id: "#projects", icon: <Icon name="book" /> },
+    { text: "Skills", id: "#skills", icon: <Icon name="rocket" /> },
+    { text: "Contact", id: "#contact", icon: <Icon name="at" /> },
+  ];
+
   return (
-    <>
-      <div className="flex border-b border-b-border flex-col items-center w-full my-4 font-bold min-[950px]:flex-row  p-3">
-        <div className="flex  items-center justify-center md:flex-1">
-          <h1
-            aria-describedby="Logo"
-            className="font-extrabold text-2xl text-center"
+    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg)]/85 backdrop-blur-xl">
+      <nav className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <div className="flex items-center justify-between gap-4">
+          <a href="#home" className="group inline-flex flex-col leading-none">
+            <span className="text-xl font-black tracking-tight sm:text-2xl">Nohim.h</span>
+            <span className="mt-1 text-xs font-bold uppercase tracking-[0.24em] text-[var(--accent)]">
+              ver 1.0
+            </span>
+          </a>
+
+          <div className="flex items-center gap-2 lg:hidden">
+            <Button
+              className="px-3 py-2 text-xs"
+              onClick={() => setLightMode((prev) => !prev)}
+            >
+              {lightMode ? "Dark" : "Light"}
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 overflow-x-auto rounded-full border border-[var(--border)] bg-[var(--surface)] p-1 shadow-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {navItems.map((item) => (
+            <NavComp key={item.id} {...item} />
+          ))}
+        </div>
+
+        <div className="hidden items-center gap-2 lg:flex">
+          <Button
+            className={lightMode ? "bg-[var(--surface-strong)]" : "bg-[var(--accent)] text-white"}
+            onClick={() => setLightMode(false)}
           >
-            <a href="/">Nohim.h</a>
-            <sup>
-              {" "}
-              <p className="inline text-lime-400 text-sm">ver 1.0</p>
-            </sup>
-            <br></br>
-            <p className="text-lg">
-              <Button
-                className="border-0 m-0 p-0 shadow-none"
-                onClick={() => setLightMode(true)}
-              >
-                <span className={`${lightMode ? "text-2xl" : null}`}>
-                  LightMode
-                </span>
-              </Button>{" "}
-              <span className="mx-2">|</span>
-              <Button
-                className="border-0 m-0 p-0 shadow-none"
-                onClick={() => setLightMode(false)}
-              >
-                <span className={`${!lightMode ? "text-2xl" : null}`}>
-                  DarkMode
-                </span>
-              </Button>
-            </p>
-          </h1>
+            Dark
+          </Button>
+          <Button
+            className={lightMode ? "bg-[var(--accent)] text-white" : "bg-[var(--surface-strong)]"}
+            onClick={() => setLightMode(true)}
+          >
+            Light
+          </Button>
         </div>
-        <div className="nav flex text-nowrap flex-row justify-center gap-10 text-sm md:text-lg md:flex-2 py-4">
-          {" "}
-          <NavComp
-            text={"Home"}
-            id="#home"
-            icon={<Icon name={"home"}></Icon>}
-          ></NavComp>
-          <NavComp
-            text={"About"}
-            id="#about"
-            icon={<Icon name={"user"}></Icon>}
-          ></NavComp>
-          <NavComp
-            text={"Projects"}
-            id="#projects"
-            icon={<Icon name={"book"}></Icon>}
-          ></NavComp>
-          <NavComp
-            text={"Skills"}
-            id="#skills"
-            icon={<Icon name={"rocket"}></Icon>}
-          ></NavComp>
-          <NavComp
-            text={"Contact Me"}
-            id="#contact"
-            icon={<Icon name={"at"}></Icon>}
-            onClick={() => document.documentElement.classList.add("dark")}
-          ></NavComp>
-        </div>
-      </div>
-    </>
+      </nav>
+    </header>
   );
 }

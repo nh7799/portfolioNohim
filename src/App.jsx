@@ -1,24 +1,15 @@
-import { useState } from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
-
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import Home from "./pages/Home";
-import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import Navigation from "./components/Navigation";
+import Home from "./pages/Home";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <HashRouter>
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
       <Navigation />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-      </Routes>
+      <Home />
       <Footer />
-    </HashRouter>
+    </div>
   );
 }
 

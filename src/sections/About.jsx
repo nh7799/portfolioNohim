@@ -1,4 +1,3 @@
-import Card from "../components/Card";
 import Icon from "../components/Icon";
 import Paragraph from "../components/Paragraph";
 import Layout from "./Layout";
@@ -12,60 +11,55 @@ const profile = {
   projects: "Embedded Validation Dashboard; PCB-Based AI Agent; Obstacle-Avoidance Robot",
   location: "Colombo, Sri Lanka | Willing to relocate to the UK for a 9–12 month placement",
 };
+
+function formatLabel(key) {
+  return key.charAt(0).toUpperCase() + key.slice(1);
+}
+
 export default function About() {
   return (
-    <>
-      <Layout
-        className="flex gap-5 md:flex-row md:gap-15 items-center justify-center flex-col"
-        sectionName={"About"}
-        id={"about"}
-      >
-        <div className="md:flex-2 order-2 md:order-1">
-          {" "}
-          <Paragraph>
-            I’m a passionate and curious problem-solver with a strong interest
-            in technology, design, and innovation.
-          </Paragraph>
-          <Paragraph>
-            I enjoy building solutions that are functional, intuitive, and
-            engaging, with experience in web development, electronics, and
-            system design.
-          </Paragraph>
-          <Paragraph>
-            I focus on writing clean, efficient, and maintainable code while
-            paying close attention to user experience and visual clarity.
-          </Paragraph>
-          <Paragraph>
-            I enjoy tackling complex problems, debugging systems, and breaking
-            challenges down into clear, logical steps.
-          </Paragraph>
-          <Paragraph>
-            I’m motivated by continuous learning and regularly explore new
-            tools, frameworks, and technologies to expand my skill set.
-          </Paragraph>
-         
-        </div>
-        <div className="max-w-300 card-comp md:flex-2 order-1 md:order-2 p-4 border border-gray-600 rounded-lg">
-          <p className="w-fit mb-2 p-2 rounded">
-            <Icon name={"info"} className="mr-2"></Icon>
-            Current status : {new Date().getFullYear()}
-          </p>
-          {Object.entries(profile).map(([key, value]) => {
-            return (
-              <p className="flex py-1">
-                <span className="mr-3 font-bold flex-1">
-                  {[...key]
-                    .map((c, i) => (i === 0 ? c.toUpperCase() : c))
-                    .join("")}
-                </span>
-                <span className="font-light flex-3">{value}</span>
-              </p>
-            );
-          })}
-        </div>
-        
+    <Layout
+      className="grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12"
+      sectionName="About"
+      id="about"
+    >
+      <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm sm:p-7">
+        <Paragraph>
+          I’m a passionate and curious problem-solver with a strong interest in technology, design, and innovation.
+        </Paragraph>
+        <Paragraph>
+          I enjoy building solutions that are functional, intuitive, and engaging, with experience in web development, electronics, and system design.
+        </Paragraph>
+        <Paragraph>
+          I focus on writing clean, efficient, and maintainable code while paying close attention to user experience and visual clarity.
+        </Paragraph>
+        <Paragraph>
+          I enjoy tackling complex problems, debugging systems, and breaking challenges down into clear, logical steps.
+        </Paragraph>
+        <Paragraph>
+          I’m motivated by continuous learning and regularly explore new tools, frameworks, and technologies to expand my skill set.
+        </Paragraph>
+      </div>
 
-      </Layout>
-    </>
+      <aside className="card-comp rounded-3xl p-5 sm:p-7">
+        <div className="mb-5 flex w-fit items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-2 text-sm font-bold text-[var(--accent)]">
+          <Icon name="info" />
+          Current status: {new Date().getFullYear()}
+        </div>
+
+        <dl className="divide-y divide-[var(--border)]">
+          {Object.entries(profile).map(([key, value]) => (
+            <div key={key} className="grid gap-1 py-4 sm:grid-cols-[0.45fr_1fr] sm:gap-4">
+              <dt className="text-sm font-extrabold uppercase tracking-wide text-[var(--muted)]">
+                {formatLabel(key)}
+              </dt>
+              <dd className="text-sm font-medium leading-7 text-[var(--text)] sm:text-base">
+                {value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </aside>
+    </Layout>
   );
 }

@@ -1,38 +1,21 @@
 // src/icons.js
 import {
-  faCoffee,
-  faAt,
-  faCheck,
-  faHome,
-  faCircleUser,
   faBook,
-  faRocket,
+  faCheck,
   faCircleInfo,
-  faLink,
-  faArrowLeft,
-  faArrowRight,
+  faCircleUser,
+  faCoffee,
+  faCode,
+  faContactCard,
+  faDotCircle,
+  faHome,
+  faPlay,
+  faPlus,
+  faRocket,
   faCircleArrowLeft,
   faCircleArrowRight,
-  faPlay,
-  faSmile,
-  faCode,
-  faDotCircle,
-  faPlus,
-  faContactCard,
-  faCircleCheck,
-  faCircle,
-  faCircleNodes,
-  faChair,
-  faArrowAltCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  faGit,
-  faGithub,
-  faGooglePlusG,
-  faLinkedin,
-  faTelegram,
-} from "@fortawesome/free-brands-svg-icons";
-import { faLine } from "@fortawesome/free-brands-svg-icons/faLine";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export const icons = {
   coffee: faCoffee,

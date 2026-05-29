@@ -15,30 +15,26 @@ export default function PdfViewer({ file }) {
   const [width, setWidth] = useState(0);
   const [numPages, setNumPages] = useState(null);
 
-  const pdfFile =
-    useMemo(() => {
-      if (file) return file;
+  const pdfFile = useMemo(() => {
+    if (file) return file;
 
-      if (!hasSupabaseConfig || !supabase) {
-        return null;
-      }
+    if (hasSupabaseConfig && supabase) {
+      const { data } = supabase.storage.from("cv").getPublicUrl("latest-cv.pdf");
+      return data.publicUrl;
+    }
 
-      const { data } = supabase.storage
-        .from("cv")
-        .getPublicUrl("latest-cv.pdf");
-
-      return `${data.publicUrl}?v=${Date.now()}`;
-    }, [file]) || "/Nohim-hasitha-cv.pdf";
+    return "/Nohim-hasitha-cv.pdf";
+  }, [file]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) return undefined;
 
     const resizeObserver = new ResizeObserver((entries) => {
-      setWidth(entries[0].contentRect.width);
+      const nextWidth = entries[0]?.contentRect?.width || 0;
+      setWidth(nextWidth);
     });
 
     resizeObserver.observe(containerRef.current);
-
     return () => resizeObserver.disconnect();
   }, []);
 
@@ -46,35 +42,43 @@ export default function PdfViewer({ file }) {
     setNumPages(numPages);
   }
 
-  if (!pdfFile) {
-    return (
-      <div className="w-full rounded-xl border border-red-300 bg-red-50 p-4 text-red-700">
-        CV could not load because Supabase environment variables are missing on
-        Vercel.
-      </div>
-    );
-  }
-
   return (
-    <div
-      ref={containerRef}
-      className="w-full overflow-auto rounded-xl border p-4 max-w-200"
-    >
-      <Document
-        file={pdfFile}
-        onLoadSuccess={handleLoadSuccess}
-        loading={<p>Loading CV...</p>}
-        error={<p>Could not load CV. Please try opening it directly.</p>}
-      >
-        {width > 0 &&
-          Array.from(new Array(numPages || 0), (_, index) => (
-            <Page
-              key={`page_${index + 1}`}
-              pageNumber={index + 1}
-              width={Math.min(width - 32, 800)}
-            />
-          ))}
-      </Document>
+    <div ref={containerRef} className="w-full max-w-5xl overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-3 shadow-sm sm:p-5">
+      <div className="mb-4 flex flex-wrap gap-3">
+        <a
+          href={pdfFile}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-xl bg-blue-700 px-4 py-2 text-sm font-bold text-white transition hover:bg-blue-500"
+        >
+          Open CV
+        </a>
+        <a
+          href={pdfFile}
+          download="Nohim-Hasitha-CV.pdf"
+          className="rounded-xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-2 text-sm font-bold transition hover:border-[var(--focus)]"
+        >
+          Download CV
+        </a>
+      </div>
+
+      <div className="max-h-[78vh] overflow-auto rounded-2xl border border-[var(--border)] bg-white/60 p-2 dark:bg-slate-950/40 sm:p-4">
+        <Document
+          file={pdfFile}
+          onLoadSuccess={handleLoadSuccess}
+          loading={<p>Loading CV...</p>}
+          error={<p>Could not load CV. Please try opening it directly.</p>}
+        >
+          {width > 0 &&
+            Array.from(new Array(numPages || 0), (_, index) => (
+              <Page
+                key={`page_${index + 1}`}
+                pageNumber={index + 1}
+                width={Math.min(width - 48, 850)}
+              />
+            ))}
+        </Document>
+      </div>
     </div>
   );
 }

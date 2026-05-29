@@ -1,25 +1,25 @@
-import { useRef } from "react";
+export default function NavComp({ id, text, icon, onClick }) {
+  function handleClick(event) {
+    event.preventDefault();
+    onClick?.();
 
-export default function NavComp({ target, id, text, icon, onClick }) {
-  function handleClick(e) {
-    onClick();
-    e.preventDefault();
-    const element = useRef(target);
+    const targetId = id?.replace("#", "");
+    const element = document.getElementById(targetId);
+
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-      });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", id);
     }
   }
-  return (
-    <>
-      <div className="hover:scale-90 transition-all">
-        <span className="hidden md:inline mr-1"> {icon}</span>
 
-        <a href={id} className=" rounded-lg" onClick={handleClick}>
-          {text}
-        </a>
-      </div>
-    </>
+  return (
+    <a
+      href={id}
+      onClick={handleClick}
+      className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-bold text-[var(--text-soft)] transition hover:bg-[var(--surface)] hover:text-[var(--text)] focus:outline-none focus:ring-4 focus:ring-[var(--ring)]"
+    >
+      <span className="hidden sm:inline-flex">{icon}</span>
+      <span>{text}</span>
+    </a>
   );
 }

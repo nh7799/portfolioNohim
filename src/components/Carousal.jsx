@@ -1,110 +1,129 @@
-import { use, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import scrollIntoView from "scroll-into-view-if-needed";
+import Button from "./Button";
 import Icon from "./Icon";
 import TechStackBox from "./TechStackBox";
-import Button from "./Button";
-import scrollIntoView from "scroll-into-view-if-needed";
 
 export default function Carousal({ data = [] }) {
   const [activeSlide, setActiveSlide] = useState(0);
-
-  const lastItem = data.length - 1;
-
   const containerRef = useRef(null);
   const scrollRef = useRef([]);
+  const lastItem = data.length - 1;
 
-  function scrollTo(index) {
+  const scrollTo = useCallback((index) => {
+    const target = scrollRef.current[index];
     const container = containerRef.current;
-    scrollIntoView(scrollRef.current[index], {
+
+    if (!target || !container) return;
+
+    scrollIntoView(target, {
       boundary: container,
       behavior: "smooth",
-      inline:"center",
-      block:"nearest"
+      inline: "center",
+      block: "nearest",
     });
-  }
+  }, []);
 
-  function updateActiveSlide(direction) {
-    let newIndex;
-    if (direction === "left") {
-      newIndex = activeSlide - 1 < 0 ? lastItem : activeSlide - 1;
-    } else if (direction === "right") {
-      newIndex = activeSlide + 1 > lastItem ? 0 : activeSlide + 1;
-    }
-    setActiveSlide(newIndex); // does not immediately change the activeSlide
-    // therefore react state activeSlide cannot be used when updating to the scrollIntoView
-    scrollTo(newIndex);
-  }
+  const updateActiveSlide = useCallback(
+    (direction) => {
+      setActiveSlide((current) => {
+        const newIndex =
+          direction === "left"
+            ? current - 1 < 0
+              ? lastItem
+              : current - 1
+            : current + 1 > lastItem
+              ? 0
+              : current + 1;
+
+        window.requestAnimationFrame(() => scrollTo(newIndex));
+        return newIndex;
+      });
+    },
+    [lastItem, scrollTo, setActiveSlide],
+  );
 
   useEffect(() => {
     scrollTo(activeSlide);
-  }, []);
+  }, [activeSlide, scrollTo]);
 
   useEffect(() => {
-    const interval = setInterval(() => updateActiveSlide("right"), 4000);
+    if (data.length <= 1) return undefined;
+    const interval = setInterval(() => updateActiveSlide("right"), 6000);
     return () => clearInterval(interval);
-  });
+  }, [data.length, lastItem, updateActiveSlide]);
+
+  if (!data.length) return null;
 
   return (
-    <>
-      <div className="flex items-center md:p-5 overflow-hidden">
-        <div>
-          <Icon
-            name={"leftArrow"}
-            className="text-4xl cursor-pointer"
-            func={() => updateActiveSlide("left")}
-          />
-        </div>
-        <div
-          className="flex gap-2 md:gap-4 overflow-x-scroll p-10 "
-          ref={containerRef}
-          style={{
-            overflowX: "auto",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-          }}
-        >
-          {data.map(
-            (
-              { id, title, description, imageUrl, techStack, projectLink },
-              i,
-            ) => (
-              <>
-                <div
-                  key={i}
-                  className={`${i !== activeSlide ? " opacity-30 grayscale pointer-events-none" : "shadow-2xl opacity-100 scale-95 md:scale-105"} flex-1 mx-2  card-comp z-20 shadow-xl flex flex-col gap-3 p-3 rounded-lg border border-gray-600 transition-all`}
-                  ref={(el) => (scrollRef.current[i] = el)}
-                  style={{ minWidth: "350px" }} 
-                >
-                  {" "}
-                  <h2 className="font-extrabold md:text-xl">{title}</h2>
-                  {{ imageUrl } && (
-                    <div
-                      className={`bg-no-repeat bg-cover bg-center rounded-sm w-full aspect-video`}
-                      style={{ backgroundImage: `url(${imageUrl})` }}
-                    ></div>
-                  )}
-                  <p className="font-light text-justify">{description}</p>
-                  <div className="flex gap-3 flex-wrap">
-                    {techStack.map((item) => (
-                      <TechStackBox>{item}</TechStackBox>
-                    ))}
-                  </div>
-                  <Button className="w-fit p-2 rounded-sm  border-0 shadow-none">
-                    <Icon name={"play"} className="mr-2"></Icon>
-                    <a href={projectLink}>See More Details</a>
-                  </Button>
-                </div>
-              </>
-            ),
-          )}
-        </div>
-        <div>
-          <Icon
-            name={"rightArrow"}
-            className="text-4xl cursor-pointer"
-            func={() => updateActiveSlide("right")}
-          />
-        </div>
+    <div className="relative w-full">
+      <div className="mb-4 flex justify-end gap-2">
+        <Button className="h-11 w-11 rounded-full p-0" onClick={() => updateActiveSlide("left")}>
+          <Icon name="leftArrow" />
+        </Button>
+        <Button className="h-11 w-11 rounded-full p-0" onClick={() => updateActiveSlide("right")}>
+          <Icon name="rightArrow" />
+        </Button>
       </div>
-    </>
+
+      <div
+        ref={containerRef}
+        className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {data.map(({ id, title, description, imageUrl, techStack, projectLink }, index) => (
+          <article
+            key={id}
+            ref={(el) => (scrollRef.current[index] = el)}
+            className={`card-comp flex min-w-[86%] snap-center flex-col overflow-hidden rounded-3xl transition duration-300 sm:min-w-[430px] lg:min-w-[460px] ${
+              index === activeSlide ? "scale-[1.01] opacity-100" : "opacity-70"
+            }`}
+          >
+            {imageUrl && (
+              <div
+                className="aspect-video w-full bg-cover bg-center"
+                style={{ backgroundImage: `url(${imageUrl})` }}
+                role="img"
+                aria-label={title}
+              />
+            )}
+
+            <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+              <h2 className="text-xl font-extrabold tracking-tight sm:text-2xl">{title}</h2>
+              <p className="text-sm sm:text-base">{description}</p>
+
+              <div className="flex flex-wrap gap-2">
+                {techStack.map((item) => (
+                  <TechStackBox key={`${id}-${item}`}>{item}</TechStackBox>
+                ))}
+              </div>
+
+              <a
+                href={projectLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto inline-flex w-fit items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-2 text-sm font-bold transition hover:-translate-y-0.5 hover:border-[var(--focus)] hover:shadow-md"
+              >
+                <Icon name="play" />
+                See More Details
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div className="mt-2 flex justify-center gap-2">
+        {data.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            aria-label={`Go to project ${index + 1}`}
+            onClick={() => setActiveSlide(index)}
+            className={`h-2.5 rounded-full transition-all ${
+              index === activeSlide ? "w-8 bg-[var(--accent)]" : "w-2.5 bg-[var(--border)]"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
