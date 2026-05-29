@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
-import Button from "./Button";
 import Icon from "./Icon";
 import NavComp from "./NavComp";
 
+const navLinks = [
+  { text: "Home", id: "#home", icon: "home" },
+  { text: "About", id: "#about", icon: "user" },
+  { text: "Projects", id: "#projects", icon: "book" },
+  { text: "Skills", id: "#skills", icon: "rocket" },
+  { text: "Contact Me", id: "#contact", icon: "at" },
+];
+
 export default function Navigation() {
   const [lightMode, setLightMode] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(
     () =>
       lightMode
@@ -12,71 +21,71 @@ export default function Navigation() {
         : document.documentElement.classList.add("dark"),
     [lightMode],
   );
+
+  useEffect(() => {
+    const closeMenu = () => setMenuOpen(false);
+    window.addEventListener("resize", closeMenu);
+    return () => window.removeEventListener("resize", closeMenu);
+  }, []);
+
   return (
-    <>
-      <div className="flex border-b border-b-border flex-col items-center w-full my-4 font-bold md:flex-row  p-3">
-        <div className="flex  items-center justify-center md:flex-1">
-          <h1
-            aria-describedby="Logo"
-            className="font-extrabold text-2xl text-center"
-          >
-            <a href="/">Nohim.h</a>
+    <header className="sticky top-0 z-50 my-4 w-full rounded-xl border border-border bg-elevated/90 p-3 shadow-md backdrop-blur-md">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center">
+        <div className="flex items-center justify-between gap-3 md:flex-1">
+          <h1 className="text-center text-xl font-semibold sm:text-2xl">
+            <a href="/" className="font-display brand-mark text-2xl sm:text-3xl">
+              Nohim.h
+            </a>
             <sup>
-              {" "}
-              <p className="inline text-lime-400 text-sm">ver 1.0</p>
+              <span className="premium-pill ml-1 inline-block rounded-full px-2 py-0.5 text-[0.65rem] font-semibold tracking-wider uppercase">
+                v1.0
+              </span>
             </sup>
-            <br></br>
-            <p className="text-lg">
-              <Button
-                className="border-0 m-0 p-0 shadow-none"
+            <div className="theme-toggle mx-auto mt-2 w-fit">
+              <button
+                type="button"
+                className={lightMode ? "active" : ""}
                 onClick={() => setLightMode(true)}
               >
-                <span className={`${lightMode ? "text-2xl" : null}`}>
-                  LightMode
-                </span>
-              </Button>{" "}
-              <span className="mx-2">|</span>
-              <Button
-                className="border-0 m-0 p-0 shadow-none"
+                Light
+              </button>
+              <button
+                type="button"
+                className={!lightMode ? "active" : ""}
                 onClick={() => setLightMode(false)}
               >
-                <span className={`${!lightMode ? "text-2xl" : null}`}>
-                  DarkMode
-                </span>
-              </Button>
-            </p>
+                Dark
+              </button>
+            </div>
           </h1>
+
+          <button
+            type="button"
+            className="rounded-lg border border-border bg-surface p-2 text-gold md:hidden"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <Icon name={menuOpen ? "close" : "menu"} className="text-2xl" />
+          </button>
         </div>
-        <div className="nav flex text-nowrap flex-row justify-center gap-10 text-sm md:text-lg md:flex-2 py-4">
-          {" "}
-          <NavComp
-            text={"Home"}
-            id="#home"
-            icon={<Icon name={"home"}></Icon>}
-          ></NavComp>
-          <NavComp
-            text={"About"}
-            id="#about"
-            icon={<Icon name={"user"}></Icon>}
-          ></NavComp>
-          <NavComp
-            text={"Projects"}
-            id="#projects"
-            icon={<Icon name={"book"}></Icon>}
-          ></NavComp>
-          <NavComp
-            text={"Skills"}
-            id="#skills"
-            icon={<Icon name={"rocket"}></Icon>}
-          ></NavComp>
-          <NavComp
-            text={"Contact Me"}
-            id="#contact"
-            icon={<Icon name={"at"}></Icon>}
-            onClick={() => document.documentElement.classList.add("dark")}
-          ></NavComp>
-        </div>
+
+        <nav
+          className={`nav flex w-full flex-col items-stretch gap-3 text-sm font-medium sm:gap-4 sm:text-base md:flex-2 md:flex-row md:justify-center md:py-0 md:text-base ${
+            menuOpen ? "flex" : "hidden md:flex"
+          }`}
+        >
+          {navLinks.map(({ text, id, icon }) => (
+            <NavComp
+              key={id}
+              text={text}
+              id={id}
+              icon={<Icon name={icon} className="text-gold" />}
+              onClick={() => setMenuOpen(false)}
+            />
+          ))}
+        </nav>
       </div>
-    </>
+    </header>
   );
 }

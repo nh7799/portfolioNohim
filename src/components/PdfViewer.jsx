@@ -58,7 +58,7 @@ export default function PdfViewer({ file }) {
   return (
     <div
       ref={containerRef}
-      className="w-full overflow-auto rounded-xl border p-4 max-w-200"
+      className="card-comp w-full max-w-full overflow-auto rounded-xl p-2 sm:p-4 lg:max-w-3xl"
     >
       <Document
         file={pdfFile}

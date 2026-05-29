@@ -45,19 +45,18 @@ export default function Carousal({ data = [] }) {
 
   return (
     <>
-      <div className="flex items-center md:p-5 overflow-hidden">
-        <div>
+      <div className="flex w-full items-center overflow-hidden md:p-5">
+        <div className="shrink-0">
           <Icon
             name={"leftArrow"}
-            className="text-4xl cursor-pointer"
+            className="cursor-pointer text-2xl text-gold transition-colors hover:text-gold-light sm:text-3xl md:text-4xl"
             func={() => updateActiveSlide("left")}
           />
         </div>
         <div
-          className="flex gap-2 md:gap-4 overflow-x-scroll p-10 "
+          className="flex min-w-0 flex-1 gap-2 overflow-x-auto scroll-smooth p-2 sm:gap-4 sm:p-4 md:p-6"
           ref={containerRef}
           style={{
-            overflowX: "auto",
             scrollbarWidth: "none",
             msOverflowStyle: "none",
           }}
@@ -67,40 +66,41 @@ export default function Carousal({ data = [] }) {
               { id, title, description, imageUrl, techStack, projectLink },
               i,
             ) => (
-              <>
-                <div
-                  key={i}
-                  className={`${i !== activeSlide ? " opacity-30 grayscale pointer-events-none" : "shadow-2xl opacity-100 scale-95 md:scale-105"} flex-1 mx-2 p-3 card-comp z-20 shadow-xl flex flex-col gap-3 md:rounded-lg border border-gray-600 transition-all`}
+              <div
+                  key={id ?? i}
+                  className={`${i !== activeSlide ? "pointer-events-none opacity-30 grayscale" : "scale-95 opacity-100 shadow-2xl ring-1 ring-gold/30 md:scale-105"} card-comp z-20 mx-1 flex w-[min(85vw,20rem)] shrink-0 flex-col gap-3 rounded-xl p-4 transition-all sm:w-[min(80vw,22rem)] md:mx-2 md:w-80`}
                   ref={(el) => (scrollRef.current[i] = el)}
-                  style={{ minWidth: "350px" }} 
                 >
                   {" "}
-                  <h2 className="font-extrabold md:text-xl">{title}</h2>
+                  <h2 className="font-display text-base font-semibold text-gold sm:text-lg md:text-xl">
+                    {title}
+                  </h2>
                   {{ imageUrl } && (
                     <div
                       className={`bg-no-repeat bg-cover bg-center rounded-sm w-full aspect-video`}
                       style={{ backgroundImage: `url(${imageUrl})` }}
                     ></div>
                   )}
-                  <p className="font-light text-justify">{description}</p>
+                  <p className="text-sm font-light text-justify sm:text-base">{description}</p>
                   <div className="flex gap-3 flex-wrap">
                     {techStack.map((item) => (
                       <TechStackBox>{item}</TechStackBox>
                     ))}
                   </div>
-                  <Button className="w-fit p-2 rounded-sm  border-0 shadow-none">
+                  <Button className="premium-btn w-fit border-0 p-2 shadow-none">
                     <Icon name={"play"} className="mr-2"></Icon>
-                    <a href={projectLink}>See More Details</a>
+                    <a href={projectLink} className="text-inherit no-underline">
+                      See More Details
+                    </a>
                   </Button>
                 </div>
-              </>
             ),
           )}
         </div>
-        <div>
+        <div className="shrink-0">
           <Icon
             name={"rightArrow"}
-            className="text-4xl cursor-pointer"
+            className="cursor-pointer text-2xl text-gold transition-colors hover:text-gold-light sm:text-3xl md:text-4xl"
             func={() => updateActiveSlide("right")}
           />
         </div>

@@ -7,11 +7,18 @@ module.exports = {
         // Tokens mapped to CSS variables (runtime switchable)
         background: "var(--bg)",
         surface: "var(--surface)",
+        "surface-hover": "var(--surface-hover)",
         muted: "var(--muted)",
         border: "var(--border)",
         ring: "var(--ring)",
         focus: "var(--focus)",
         text: "var(--text)",
+        "text-secondary": "var(--text-secondary)",
+        elevated: "var(--bg-elevated)",
+        gold: "var(--gold)",
+        "gold-light": "var(--gold-light)",
+        "gold-muted": "var(--gold-muted)",
+        navy: "var(--navy)",
 
         // Full scales for primary/secondary/accent using CSS variables
         primary: {

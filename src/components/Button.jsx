@@ -13,7 +13,7 @@ export default function Button({
       onClick={onClick}
       onSubmit={onSubmit}
       className={twMerge(
-        "border shadow-lg  p-3 rounded-lg  transition-all ",
+        "rounded-lg border border-border bg-surface px-4 py-2.5 font-semibold text-text shadow-sm transition-all duration-200 hover:border-gold hover:bg-surface-hover",
         className,
       )}
     >

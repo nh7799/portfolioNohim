@@ -5,21 +5,22 @@ import Icon from "../components/Icon";
 export default function Hero() {
   return (
     <>
-      <div className="hero-comp flex flex-col lg:flex-row h-full">
-        <div className="hero-none-graphic flex hero-text order-2 lg:order-1 md:order-1 md:flex-3  justify-center p-10 md:p-15 flex-col gap-10">
+      <div id="home" className="hero-comp flex h-full flex-col lg:flex-row">
+        <div className="hero-none-graphic hero-text order-2 flex flex-col justify-center gap-6 p-4 sm:gap-8 sm:p-6 md:order-1 md:flex-3 md:gap-10 md:p-10 lg:order-1">
           {" "}
           <div className="">
             {" "}
-            <h1 className="md:text-4xl font-bold text-2xl">
-              Hello world, I am Nohim and i really want to make a difference,
+            <h1 className="font-display text-xl font-semibold leading-snug text-text sm:text-2xl md:text-3xl lg:text-4xl">
+              Hello world, I am{" "}
+              <span className="brand-mark">Nohim</span> and i really want to make a difference,
               and i am aware that it is always up to me.
               <Icon name={"code"}></Icon>
               <Icon></Icon>
             </h1>
           </div>
-          <div className="text-2xl font-light">
+          <div className="font-light">
             {" "}
-            <p className="text-xl md:text-2xl">
+            <p className="text-base leading-relaxed sm:text-lg md:text-xl lg:text-2xl">
               I am a Level 5 Computer Science student at the University of
               Hertfordshire, seeking a 2026 placement year opportunity in
               software engineering, technology, or related roles. I enjoy
@@ -39,8 +40,7 @@ export default function Hero() {
           </div>
           <div className="flex gap-2">
             <BackgroundBox
-              backgroundColor="bg-blue-600"
-              className="text-white"
+              variant="accent"
               text={"LinkedIn"}
               icon={<Icon name={"linkedIn"}></Icon>}
               isLink={
@@ -48,8 +48,7 @@ export default function Hero() {
               }
             ></BackgroundBox>
             <BackgroundBox
-              backgroundColor="bg-gray-900"
-              className="text-white"
+              variant="surface"
               text={"GitHub"}
               icon={<Icon name={"github"}></Icon>}
               isLink={
@@ -64,8 +63,8 @@ export default function Hero() {
             </Button> */}
           </div>
         </div>
-        <div className="flex image order-1 lg:order-2 md:order-2 md:flex-2 items-center justify-center">
-          <div className="rounded-full grayscale contrast-150 profile-image w-50 h-50 lg:w-100 lg:h-100 md:w-70 md:h-70">
+        <div className="image order-1 flex items-center justify-center md:order-2 md:flex-2 lg:order-2">
+          <div className="profile-image h-40 w-40 rounded-full contrast-150 grayscale sm:h-48 sm:w-48 md:h-56 md:w-56 lg:h-72 lg:w-72 xl:h-80 xl:w-80">
             {" "}
           </div>
         </div>

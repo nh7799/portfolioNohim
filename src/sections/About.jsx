@@ -16,7 +16,7 @@ export default function About() {
   return (
     <>
       <Layout
-        className="flex gap-5 md:flex-row md:gap-15 items-center justify-center flex-col"
+        className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-10 lg:gap-15"
         sectionName={"About"}
         id={"about"}
       >
@@ -45,20 +45,20 @@ export default function About() {
           </Paragraph>
          
         </div>
-        <div className="max-w-300 card-comp md:flex-2 order-1 md:order-2 p-4 border border-gray-600 rounded-lg">
-          <p className="w-fit mb-2 p-2 rounded">
-            <Icon name={"info"} className="mr-2"></Icon>
+        <div className="card-comp order-1 w-full max-w-full rounded-xl p-5 md:order-2 md:max-w-md md:flex-2 lg:max-w-lg">
+          <p className="mb-2 w-fit rounded-lg premium-pill p-2 text-sm">
+            <Icon name={"info"} className="mr-2 text-gold"></Icon>
             Current status : {new Date().getFullYear()}
           </p>
           {Object.entries(profile).map(([key, value]) => {
             return (
-              <p className="flex py-1">
-                <span className="mr-3 font-bold flex-1">
+              <p key={key} className="flex flex-col gap-1 py-2 sm:flex-row sm:gap-3">
+                <span className="shrink-0 font-semibold text-gold sm:min-w-[7rem] sm:flex-1">
                   {[...key]
                     .map((c, i) => (i === 0 ? c.toUpperCase() : c))
                     .join("")}
                 </span>
-                <span className="font-light flex-3">{value}</span>
+                <span className="font-light sm:flex-[3]">{value}</span>
               </p>
             );
           })}

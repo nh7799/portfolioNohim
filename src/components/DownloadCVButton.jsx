@@ -44,7 +44,7 @@ export default function DownloadCVButton({ className = "" }) {
       <button
         type="button"
         disabled
-        className={`cursor-not-allowed rounded-lg bg-gray-400 px-5 py-3 text-white ${className}`}
+        className={`cursor-not-allowed rounded-lg border border-border bg-surface px-5 py-3 text-muted ${className}`}
       >
         CV Unavailable
       </button>
@@ -55,7 +55,7 @@ export default function DownloadCVButton({ className = "" }) {
     <button
       type="button"
       onClick={handleDownload}
-      className={`rounded-lg bg-blue-700 px-5 py-3 text-white hover:bg-blue-500 ${className}`}
+      className={`premium-btn rounded-lg px-6 py-3 ${className}`}
     >
       Download CV
     </button>

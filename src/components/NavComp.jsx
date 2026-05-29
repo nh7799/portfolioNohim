@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 export default function NavComp({ target, id, text, icon, onClick }) {
   function handleClick(e) {
-    onClick();
+    onClick?.();
     e.preventDefault();
     const element = useRef(target);
     if (element) {
@@ -13,10 +13,13 @@ export default function NavComp({ target, id, text, icon, onClick }) {
   }
   return (
     <>
-      <div className="hover:scale-90 transition-all">
-        <span className="hidden md:inline mr-1"> {icon}</span>
-
-        <a href={id} className=" rounded-lg" onClick={handleClick}>
+      <div className="transition-all hover:scale-90">
+        <a
+          href={id}
+          className="flex items-center justify-center gap-2 rounded-lg py-2 transition-colors md:justify-start md:py-0"
+          onClick={handleClick}
+        >
+          <span className="inline md:mr-1">{icon}</span>
           {text}
         </a>
       </div>

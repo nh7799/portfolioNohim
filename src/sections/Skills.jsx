@@ -22,16 +22,15 @@ export default function Skills() {
       <Layout
         id={"Skills"}
         sectionName={"Skills"}
-        className={`flex flex-col gap-8 p-5`}
+        className="flex flex-col gap-6 p-2 sm:gap-8 sm:p-4"
       >
         <div
           className={`flex gap-5 flex-wrap `}
         >
           {skills.map((item) => (
             <BackgroundBox
-              backgroundColor={"inherit"}
               text={item}
-              className="text-nowrap skills-box"
+              className="skills-box text-nowrap"
             ></BackgroundBox>
           ))}
         </div>

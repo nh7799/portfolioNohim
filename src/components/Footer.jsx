@@ -4,11 +4,11 @@ import Icon from "./Icon";
 export default function Footer() {
   return (
     <>
-      <div className="footer p-8">
+      <div className="footer mt-8 flex flex-col gap-6 p-4 text-text-secondary sm:p-6 md:p-8">
         <div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <BackgroundBox
-              backgroundColor="bg-blue-600"
+              variant="accent"
               text={"LinkedIn"}
               icon={<Icon name={"linkedIn"}></Icon>}
               isLink={
@@ -16,7 +16,7 @@ export default function Footer() {
               }
             ></BackgroundBox>
             <BackgroundBox
-              backgroundColor="bg-gray-900"
+              variant="surface"
               text={"GitHub"}
               icon={<Icon name={"github"}></Icon>}
               isLink={

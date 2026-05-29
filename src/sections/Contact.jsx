@@ -10,13 +10,15 @@ export default function Contact() {
           <form
             action="https://formspree.io/f/mredjrrp"
             method="POST"
-            className="flex w-full max-w-2xl flex-col gap-6 rounded-lg border border-gray-600 p-7"
+            className="card-comp flex w-full max-w-2xl flex-col gap-6 rounded-xl p-4 sm:p-7"
           >
             <fieldset>
               {" "}
-              <label htmlFor="first">Firstname</label>
+              <label htmlFor="first" className="text-sm font-semibold tracking-wide text-gold uppercase">
+                Firstname
+              </label>
               <input
-                className="mt-3 font-medium text-gray-500 outline-0 border-b block w-full  border-gray-700 "
+                className="premium-input mt-3 block w-full font-medium"
                 type="text"
                 name="first"
                 placeholder="John"
@@ -26,9 +28,11 @@ export default function Contact() {
             </fieldset>
 
             <fieldset>
-              <label htmlFor="last">Lastname</label>
+              <label htmlFor="last" className="text-sm font-semibold tracking-wide text-gold uppercase">
+                Lastname
+              </label>
               <input
-                className="mt-3 font-medium text-gray-500 outline-0 border-b block  border-gray-700 w-full"
+                className="premium-input mt-3 block w-full font-medium"
                 type="text"
                 name="last"
                 placeholder="doe"
@@ -37,9 +41,11 @@ export default function Contact() {
             </fieldset>
 
             <fieldset>
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email" className="text-sm font-semibold tracking-wide text-gold uppercase">
+                Email
+              </label>
               <input
-                className="mt-3 font-medium text-gray-500  outline-0 border-b block  border-gray-700 w-full"
+                className="premium-input mt-3 block w-full font-medium"
                 type="email"
                 name="email"
                 id="email"
@@ -50,7 +56,7 @@ export default function Contact() {
 
             <Button
               type={"submit"}
-              className="border-gray-700 bg-blue-700 hover:bg-blue-400"
+              className="premium-btn w-full border-0 shadow-none"
               onClick={(e) => {
                 const button = e.currentTarget;
                 button.textContent = "please wait...";

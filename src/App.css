@@ -2,32 +2,157 @@
 @plugin "daisyui";
 @config "../tailwind.config.js";
 
+/* Executive palette — warm ivory (light) / midnight navy + champagne gold (dark) */
 :root {
-  --bg: #fffffff1;
-  --surface: #f8fafc;
-  --muted: #64748b;
-  --border: #e6eef8;
-  --ring: #c7d2fe;
-  --focus: #334155;
-  --text: #0f172a;
+  --bg: #f6f3ec;
+  --bg-elevated: #fffcf7;
+  --surface: #ebe6dc;
+  --surface-hover: #e2dcd0;
+  --text: #0f1419;
+  --text-secondary: #3a4252;
+  --muted: #5a6375;
+  --border: #d8d2c6;
+  --border-strong: #c4bcad;
+  --ring: #a6843d;
+  --focus: #0f1419;
+
+  --gold: #8f6f2e;
+  --gold-light: #b8954a;
+  --gold-bright: #d4af5a;
+  --gold-muted: rgba(143, 111, 46, 0.14);
+  --gold-glow: rgba(184, 149, 74, 0.25);
+
+  --navy: #1a2f4a;
+  --navy-muted: rgba(26, 47, 74, 0.08);
+
+  --accent-400: #b8954a;
+  --accent-500: #8f6f2e;
+  --accent-600: #735a24;
+  --accent-foreground: #fffcf7;
+
+  --primary-400: #3d5f82;
+  --primary-500: #1a2f4a;
+  --primary-600: #142438;
+
+  --secondary-500: #4a5d4f;
+  --secondary-foreground: #f6f3ec;
+
+  --success: #3d6b4f;
+  --info: #3d5f82;
+  --warning: #a6843d;
+  --danger: #9b3d3d;
+
+  --shadow-sm: 0 1px 2px rgba(15, 20, 25, 0.05);
+  --shadow-md: 0 12px 40px rgba(15, 20, 25, 0.08);
+  --shadow-lg: 0 24px 56px rgba(15, 20, 25, 0.1);
+  --shadow-glow: 0 0 48px var(--gold-glow);
+
+  --gradient-page: linear-gradient(
+    165deg,
+    #f6f3ec 0%,
+    #efe9df 45%,
+    #f6f3ec 100%
+  );
+  --gradient-hero: radial-gradient(
+      ellipse 75% 55% at 85% 10%,
+      rgba(184, 149, 74, 0.14),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at 5% 85%,
+      rgba(26, 47, 74, 0.07),
+      transparent 50%
+    );
+  --gradient-accent: linear-gradient(135deg, #b8954a 0%, #8f6f2e 50%, #735a24 100%);
+  --gradient-card: linear-gradient(
+    145deg,
+    rgba(255, 252, 247, 0.95) 0%,
+    rgba(235, 230, 220, 0.85) 100%
+  );
 }
 
 .dark {
-  --bg: #000000;
-  --surface: #0f1724;
-  --muted: #94a3b8;
-  --border: #1f2937;
-  --ring: #5b21b6;
-  --focus: #e6edf3;
-  --text: #e6eef8;
+  --bg: #080b10;
+  --bg-elevated: #0e1219;
+  --surface: #141a24;
+  --surface-hover: #1a2230;
+  --text: #f2ede4;
+  --text-secondary: #b4bcc8;
+  --muted: #7a8494;
+  --border: rgba(201, 169, 98, 0.16);
+  --border-strong: rgba(201, 169, 98, 0.28);
+  --ring: #c9a962;
+  --focus: #f2ede4;
+
+  --gold: #c9a962;
+  --gold-light: #e0c47a;
+  --gold-bright: #f0d890;
+  --gold-muted: rgba(201, 169, 98, 0.1);
+  --gold-glow: rgba(201, 169, 98, 0.12);
+
+  --navy: #8fa8c4;
+  --navy-muted: rgba(143, 168, 196, 0.06);
+
+  --accent-400: #e0c47a;
+  --accent-500: #c9a962;
+  --accent-600: #a6843d;
+  --accent-foreground: #080b10;
+
+  --primary-400: #6b8aab;
+  --primary-500: #3d5f82;
+  --primary-600: #2a4560;
+
+  --secondary-500: #6b8f71;
+  --secondary-foreground: #080b10;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 28px 64px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 72px var(--gold-glow);
+
+  --gradient-page: linear-gradient(
+    165deg,
+    #080b10 0%,
+    #0c1018 40%,
+    #080b10 100%
+  );
+  --gradient-hero: radial-gradient(
+      ellipse 70% 50% at 80% 5%,
+      rgba(201, 169, 98, 0.11),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 0% 90%,
+      rgba(61, 95, 130, 0.18),
+      transparent 50%
+    );
+  --gradient-accent: linear-gradient(135deg, #e0c47a 0%, #c9a962 45%, #a6843d 100%);
+  --gradient-card: linear-gradient(
+    145deg,
+    rgba(20, 26, 36, 0.92) 0%,
+    rgba(14, 18, 25, 0.88) 100%
+  );
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--gradient-page);
+  background-color: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
 }
 
 #root {
-  /* max-width: 1280px; */
-  /* margin: 0 auto; */
-  /* padding: 2rem; */
-  /* text-align: center; */
-  font-family: "IBM Plex Sans", serif;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: "Playfair Display", Georgia, serif;
 }
 
 .logo {
@@ -36,30 +161,14 @@
   will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
 p {
-  font-weight: 100;
-  line-height: 1.5;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+::selection {
+  background: var(--gold-muted);
+  color: var(--text);
 }

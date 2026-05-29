@@ -13,11 +13,13 @@ function App() {
 
   return (
     <HashRouter>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-      </Routes>
-      <Footer />
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
+        <Footer />
+      </div>
     </HashRouter>
   );
 }

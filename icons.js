@@ -24,6 +24,8 @@ import {
   faCircleNodes,
   faChair,
   faArrowAltCircleRight,
+  faBars,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGit,
@@ -51,4 +53,6 @@ export const icons = {
   code: faCode,
   dot: faDotCircle,
   plus: faPlus,
+  menu: faBars,
+  close: faXmark,
 };
