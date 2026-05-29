@@ -12,7 +12,7 @@ export const projectCards = [
     built:
       "A React dashboard that displays simulated validation runs: device status, results, logs, and failure summaries. Structured for engineers reviewing test output.",
     techStack: ["React", "Vite", "JavaScript", "Tailwind CSS"],
-    proof: { label: "GitHub", href: "https://github.com/nh7799" },
+    proof: { label: "available on Vercel", href: "https://the-embedded-validation-project.vercel.app/" },
     recruiterValue:
       "Shows I can build internal tooling and present technical data clearly — relevant to QA, validation, and platform teams.",
     imageUrl: validationDashboard,
@@ -33,7 +33,7 @@ export const projectCards = [
     ],
     proof: {
       label: "LinkedIn project write-up",
-      href: "https://www.linkedin.com/in/nohim-hasitha-weedagama-arachchi/details/projects/",
+      href: "https://www.linkedin.com/posts/nohim-hasitha-weedagama-arachchi_artificialintelligence-embeddedsystems-rp2040-ugcPost-7434502024135602176-5hhu/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFO5FfoBREn7muI-gnRoOoNEq9x7aOf6Zjk",
     },
     recruiterValue:
       "Demonstrates end-to-end delivery: hardware design, firmware, and applied AI — not just simulation.",
@@ -63,7 +63,7 @@ export const projectCards = [
     built:
       "Software SPI driver on Raspberry Pi Pico: init sequences, data transfer, display updates, and hardware debugging.",
     techStack: ["MicroPython", "Raspberry Pi Pico", "MAX7219", "Software SPI"],
-    proof: { label: "GitHub", href: "https://github.com/nh7799" },
+    proof: { label: "LinkedIn", href: "https://www.linkedin.com/in/nohim-hasitha-weedagama-arachchi/details/projects/" },
     recruiterValue:
       "Low-level driver work — useful for teams hiring placement students who can read datasheets and integrate peripherals.",
     imageUrl: max7219,
