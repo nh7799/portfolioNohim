@@ -10,7 +10,7 @@ export default function ProjectCard({
   return (
     <article className="project-card">
       {imageUrl && (
-        <div className="project-card-media">
+        <div className="project-card-media studio-photo">
           <img
             src={imageUrl}
             alt=""

@@ -6,8 +6,8 @@ export default function RecruiterSnapshot() {
     <Section
       id="snapshot"
       label="At a glance"
-      title="Recruiter snapshot"
-      intro="Key facts for a first screen — no fluff."
+      title="Recruiter's snapshot"
+      intro="all the information you need to know about me"
     >
       <div className="panel px-5 sm:px-6">
         <dl>

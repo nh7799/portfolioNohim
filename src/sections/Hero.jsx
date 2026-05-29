@@ -37,7 +37,7 @@ export default function Hero() {
 
         <aside className="hero-aside">
           <div
-            className="profile-photo"
+            className="profile-photo studio-photo"
             role="img"
             aria-label="Portrait of Nohim Hasitha"
           />

@@ -36,6 +36,13 @@
   --text-measure: min(100%, 36rem);
   --section-gap: clamp(2.75rem, 5vw, 4rem);
   --radius: 0.5rem;
+
+  /* Subtle studio grade — keeps photos natural, not filtered-looking */
+  --studio-filter: contrast(1.05) saturate(0.9) brightness(1.02) sepia(0.04);
+  --studio-rim: rgba(255, 255, 255, 0.1);
+  --studio-highlight: rgba(255, 255, 255, 0.07);
+  --studio-shadow: rgba(15, 23, 42, 0.04);
+  --studio-vignette: rgba(15, 23, 42, 0.06);
 }
 
 @media (min-width: 640px) {
@@ -94,6 +101,12 @@
   --accent-hover: #7eb3ff;
   --accent-muted: rgba(91, 154, 255, 0.12);
   --accent-foreground: #0f1117;
+
+  --studio-filter: contrast(1.04) saturate(0.88) brightness(1.05) sepia(0.03);
+  --studio-rim: rgba(255, 255, 255, 0.05);
+  --studio-highlight: rgba(255, 255, 255, 0.05);
+  --studio-shadow: rgba(0, 0, 0, 0.12);
+  --studio-vignette: rgba(0, 0, 0, 0.16);
 }
 
 html {
