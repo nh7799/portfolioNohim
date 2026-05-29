@@ -64,7 +64,11 @@ a {
   text-decoration: none;
 }
 
-button, a, input, textarea, select {
+button,
+a,
+input,
+textarea,
+select {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -80,7 +84,7 @@ p {
 
 .profile-image {
   background-image: url("./assets/IMG_0885.jpeg");
-  background-position: center top;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -99,17 +103,8 @@ p {
 }
 
 .hero-comp {
-  min-height: calc(100svh - 4rem);
+  min-height: calc(100svh - 5rem);
   position: relative;
-}
-
-/* No forced viewport height on phones — content determines height */
-@media (max-width: 767px) {
-  .hero-comp {
-    min-height: auto;
-    padding-top: 2.5rem;
-    padding-bottom: 3rem;
-  }
 }
 
 .card-comp,
@@ -136,11 +131,13 @@ p {
 .react-pdf__Page canvas {
   max-width: 100% !important;
   height: auto !important;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;

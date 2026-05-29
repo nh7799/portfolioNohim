@@ -3,9 +3,9 @@ import Icon from "./Icon";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] px-4 py-8 sm:px-6 sm:py-10">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-        <div className="flex flex-wrap gap-2 sm:gap-3">
+    <footer className="border-t border-[var(--border)] px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-wrap gap-3">
           <BackgroundBox
             backgroundColor="bg-blue-600"
             className="border-blue-500 text-white"
@@ -22,9 +22,10 @@ export default function Footer() {
           />
           <BackgroundBox text="100% Accessibility Compliant" />
         </div>
-        <div className="max-w-sm text-left sm:max-w-xs sm:text-right md:max-w-sm">
-          <p className="text-sm font-bold text-[var(--text)] sm:text-base">&copy; All rights reserved.</p>
-          <p className="mt-1.5 text-xs leading-relaxed sm:mt-2">
+
+        <div className="max-w-xl text-left sm:text-right">
+          <p className="text-base font-bold text-[var(--text)]">&copy; All rights reserved.</p>
+          <p className="mt-2 text-sm">
             All the data shown in here are valid as of 2026; however, it is not guaranteed to be 100% accurate. Minor discrepancies may exist, therefore contacting me can clarify further doubt.
           </p>
         </div>
