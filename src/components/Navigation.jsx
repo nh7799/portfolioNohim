@@ -5,6 +5,7 @@ import ThemeToggle from "./ThemeToggle";
 import useActiveSection from "../hooks/useActiveSection";
 import useBodyScrollLock from "../hooks/useBodyScrollLock";
 import { heroLinks } from "../data/snapshot";
+import { scrollToSection } from "../lib/scrollToSection";
 
 const navLinks = [
   { text: "Snapshot", id: "#snapshot" },
@@ -41,7 +42,15 @@ export default function Navigation() {
     <>
       <header className="site-header">
         <div className="site-header-inner">
-          <a href="#home" className="site-logo" title="Nohim Hasitha">
+          <a
+            href="#home"
+            className="site-logo"
+            title="Nohim Hasitha"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("home");
+            }}
+          >
             Nohim Hasitha
           </a>
 

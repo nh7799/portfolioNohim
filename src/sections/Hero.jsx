@@ -1,4 +1,5 @@
 import { heroLinks } from "../data/snapshot";
+import { scrollToSection } from "../lib/scrollToSection";
 
 export default function Hero() {
   return (
@@ -18,7 +19,14 @@ export default function Hero() {
           </p>
 
           <div className="btn-row mt-8">
-            <a href="#projects" className="btn btn-primary">
+            <a
+              href="#projects"
+              className="btn btn-primary"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("projects");
+              }}
+            >
               View projects
             </a>
             <a href={heroLinks.cv} className="btn btn-outline">

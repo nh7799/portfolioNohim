@@ -1,18 +1,33 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "./hooks/useTheme.jsx";
+import { scrollToSection } from "./lib/scrollToSection";
+
+function SkipToContent() {
+  return (
+    <a
+      href="#main"
+      className="skip-link"
+      onClick={(e) => {
+        e.preventDefault();
+        scrollToSection("main", { behavior: "auto" });
+        document.getElementById("main")?.focus({ preventScroll: true });
+      }}
+    >
+      Skip to content
+    </a>
+  );
+}
 
 function App() {
   return (
     <ThemeProvider>
-      <HashRouter>
+      <BrowserRouter>
         <div className="page">
-          <a href="#main" className="skip-link">
-            Skip to content
-          </a>
+          <SkipToContent />
           <Navigation />
           <div id="main" className="page-inner page-main" tabIndex={-1}>
             <Routes>
@@ -21,7 +36,7 @@ function App() {
             <Footer />
           </div>
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
