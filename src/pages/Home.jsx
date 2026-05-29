@@ -3,18 +3,20 @@ import About from "../sections/About";
 import Contact from "../sections/Contact";
 import Hero from "../sections/Hero";
 import Projects from "../sections/Projects";
+import Resume from "../sections/Resume";
 import Skills from "../sections/Skills";
 
 export default function Home() {
   return (
-    <>
-      <div className="w-full h-full max-w-500">
-        <Hero></Hero>
-        <About></About>
-        <Projects></Projects>
-        <Skills></Skills>
-        <Contact></Contact>
+    <main className="min-h-screen w-full overflow-x-hidden">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Hero />
+        <About />
+        <Projects />
+        <Skills />
+        <Resume />
+        <Contact />
       </div>
-    </>
+    </main>
   );
 }
