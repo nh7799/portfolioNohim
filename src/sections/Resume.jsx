@@ -13,9 +13,9 @@ export default function Resume() {
           <a
             href="/Nohim-hasitha-cv.pdf"
             download="Nohim-hasitha-cv.pdf"
-            className="rounded-lg bg-blue-700 px-5 py-3 text-white hover:bg-blue-500"
+            className="rounded-lg  px-5 py-3 text-white"
           >
-            <DownloadCVButton className="border-gray-700 bg-blue-700 hover:bg-blue-400">
+            <DownloadCVButton className=" bg-blue-700 hover:bg-blue-400 border-0">
               Download CV
             </DownloadCVButton>
           </a>

@@ -3,7 +3,8 @@ import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
-console.log("Supabase URL exists:", Boolean(supabaseUrl));
-console.log("Supabase KEY exists:", Boolean(supabaseKey));
+export const hasSupabaseConfig = Boolean(supabaseUrl && supabaseKey);
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = hasSupabaseConfig
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;

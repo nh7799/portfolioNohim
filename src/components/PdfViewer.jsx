@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { supabase } from "../lib/supabaseClient";
+import { hasSupabaseConfig, supabase } from "../lib/supabaseClient";
 
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -15,30 +15,47 @@ export default function PdfViewer({ file }) {
   const [width, setWidth] = useState(0);
   const [numPages, setNumPages] = useState(null);
 
-  const latestCvUrl = useMemo(() => {
+  const pdfFile = useMemo(() => {
+    // If a local/manual file is passed, use that first
+    if (file) {
+      return file;
+    }
+
+    // If no local file is passed, use Supabase
+    if (!hasSupabaseConfig || !supabase) {
+      console.error("Supabase is not configured correctly.");
+      return null;
+    }
+
     const { data } = supabase.storage.from("cv").getPublicUrl("latest-cv.pdf");
 
-    // Cache buster so the browser does not keep showing the old CV
     return `${data.publicUrl}?v=${Date.now()}`;
-  }, []);
-
-  const pdfFile = file || latestCvUrl;
+  }, [file]);
 
   useEffect(() => {
+    if (!containerRef.current) return;
+
     const resizeObserver = new ResizeObserver((entries) => {
       const containerWidth = entries[0].contentRect.width;
       setWidth(containerWidth);
     });
 
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
+    resizeObserver.observe(containerRef.current);
 
     return () => resizeObserver.disconnect();
   }, []);
 
   function handleLoadSuccess({ numPages }) {
     setNumPages(numPages);
+  }
+
+  if (!pdfFile) {
+    return (
+      <div className="w-full rounded-xl border border-red-300 bg-red-50 p-4 text-red-700">
+        CV could not load. Supabase environment variables are missing or
+        incorrect.
+      </div>
+    );
   }
 
   return (
