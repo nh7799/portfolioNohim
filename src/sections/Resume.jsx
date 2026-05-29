@@ -1,21 +1,24 @@
-import Button from "../components/Button";
 import DownloadCVButton from "../components/DownloadCVButton";
 import PdfViewer from "../components/PdfViewer";
-import Layout from "./Layout";
-import cvPdf from "/Nohim-hasitha-cv.pdf";
+import Reveal from "../components/Reveal";
+import Section from "../components/Section";
 
 export default function Resume() {
   return (
-    <>
-      <Layout sectionName={"CV/Resume"} id={"resume"}>
-        <div className="flex flex-col gap-y-10 justify-center items-center rounded-lg">
-          <PdfViewer></PdfViewer>
-
-          <DownloadCVButton className="premium-btn border-0">
-            Download CV
-          </DownloadCVButton>
+    <Section
+      id="resume"
+      eyebrow="Resume"
+      title="CV"
+      description="Download or preview my latest CV. Updated for placement applications."
+    >
+      <Reveal>
+        <div className="flex flex-col gap-6 sm:gap-8">
+          <DownloadCVButton />
+          <div className="pdf-shell w-full min-w-0">
+            <PdfViewer />
+          </div>
         </div>
-      </Layout>
-    </>
+      </Reveal>
+    </Section>
   );
 }

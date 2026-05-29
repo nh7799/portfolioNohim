@@ -1,21 +1,11 @@
 import { twMerge } from "tailwind-merge";
 
-export default function Button({
-  className,
-  children,
-  onClick,
-  onSubmit,
-  type,
-}) {
+export default function Button({ className, children, onClick, type }) {
   return (
     <button
-      type={type}
+      type={type ?? "button"}
       onClick={onClick}
-      onSubmit={onSubmit}
-      className={twMerge(
-        "rounded-lg border border-border bg-surface px-4 py-2.5 font-semibold text-text shadow-sm transition-all duration-200 hover:border-gold hover:bg-surface-hover",
-        className,
-      )}
+      className={twMerge("btn", className)}
     >
       {children}
     </button>

@@ -9,53 +9,37 @@ export default function DownloadCVButton({ className = "" }) {
 
   async function handleDownload() {
     if (!cvUrl) {
-      alert("CV is not available right now.");
+      window.open("/Nohim-hasitha-cv.pdf", "_blank");
       return;
     }
 
     try {
       const response = await fetch(`${cvUrl}?v=${Date.now()}`);
-
       const contentType = response.headers.get("content-type");
 
       if (!response.ok || !contentType?.includes("application/pdf")) {
-        throw new Error("The file returned is not a PDF.");
+        throw new Error("Not a PDF");
       }
 
       const blob = await response.blob();
       const blobUrl = window.URL.createObjectURL(blob);
-
       const link = document.createElement("a");
       link.href = blobUrl;
       link.download = "Nohim-Hasitha-CV.pdf";
       document.body.appendChild(link);
       link.click();
       link.remove();
-
       window.URL.revokeObjectURL(blobUrl);
-    } catch (error) {
-      console.error("CV download failed:", error);
+    } catch {
       window.open(cvUrl, "_blank", "noopener,noreferrer");
     }
-  }
-
-  if (!cvUrl) {
-    return (
-      <button
-        type="button"
-        disabled
-        className={`cursor-not-allowed rounded-lg border border-border bg-surface px-5 py-3 text-muted ${className}`}
-      >
-        CV Unavailable
-      </button>
-    );
   }
 
   return (
     <button
       type="button"
       onClick={handleDownload}
-      className={`premium-btn rounded-lg px-6 py-3 ${className}`}
+      className={`btn btn-primary ${className}`}
     >
       Download CV
     </button>

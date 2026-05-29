@@ -1,28 +1,20 @@
-import { useRef } from "react";
+export default function NavComp({ id, text, active, onClick, className = "" }) {
+  const sectionId = id.replace("#", "");
 
-export default function NavComp({ target, id, text, icon, onClick }) {
   function handleClick(e) {
     onClick?.();
     e.preventDefault();
-    const element = useRef(target);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
+    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   }
+
   return (
-    <>
-      <div className="transition-all hover:scale-90">
-        <a
-          href={id}
-          className="flex items-center justify-center gap-2 rounded-lg py-2 transition-colors md:justify-start md:py-0"
-          onClick={handleClick}
-        >
-          <span className="inline md:mr-1">{icon}</span>
-          {text}
-        </a>
-      </div>
-    </>
+    <a
+      href={id}
+      onClick={handleClick}
+      className={`nav-link ${active === sectionId ? "nav-link-active" : ""} ${className}`}
+      aria-current={active === sectionId ? "page" : undefined}
+    >
+      {text}
+    </a>
   );
 }

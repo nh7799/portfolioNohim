@@ -1,77 +1,69 @@
 import Button from "../components/Button";
-import PdfViewer from "../components/PdfViewer";
-import Layout from "./Layout";
+import Section from "../components/Section";
 
 export default function Contact() {
   return (
-    <>
-      <Layout sectionName={"Contact Me"} id={"contact"}>
-        <div className="flex flex-col gap-y-10 justify-center items-center rounded-lg">
-          <form
-            action="https://formspree.io/f/mredjrrp"
-            method="POST"
-            className="card-comp flex w-full max-w-2xl flex-col gap-6 rounded-xl p-4 sm:p-7"
-          >
-            <fieldset>
-              {" "}
-              <label htmlFor="first" className="text-sm font-semibold tracking-wide text-gold uppercase">
-                Firstname
-              </label>
-              <input
-                className="premium-input mt-3 block w-full font-medium"
-                type="text"
-                name="first"
-                placeholder="John"
-                id=""
-                required
-              />
-            </fieldset>
+    <Section
+      id="contact"
+      label="Contact"
+      title="Get in touch"
+      intro="For placement and internship enquiries. I reply within a few working days."
+    >
+      <form
+        action="https://formspree.io/f/mredjrrp"
+        method="POST"
+        className="panel prose-width p-5 sm:p-6"
+      >
+        <div className="space-y-5">
+          <fieldset>
+            <label htmlFor="first" className="text-sm font-medium text-text">
+              First name
+            </label>
+            <input
+              id="first"
+              name="first"
+              type="text"
+              required
+              autoComplete="given-name"
+              className="input-field mt-1"
+              placeholder="Jane"
+            />
+          </fieldset>
 
-            <fieldset>
-              <label htmlFor="last" className="text-sm font-semibold tracking-wide text-gold uppercase">
-                Lastname
-              </label>
-              <input
-                className="premium-input mt-3 block w-full font-medium"
-                type="text"
-                name="last"
-                placeholder="doe"
-                id=""
-              />
-            </fieldset>
+          <fieldset>
+            <label htmlFor="last" className="text-sm font-medium text-text">
+              Last name
+            </label>
+            <input
+              id="last"
+              name="last"
+              type="text"
+              autoComplete="family-name"
+              className="input-field mt-1"
+              placeholder="Smith"
+            />
+          </fieldset>
 
-            <fieldset>
-              <label htmlFor="email" className="text-sm font-semibold tracking-wide text-gold uppercase">
-                Email
-              </label>
-              <input
-                className="premium-input mt-3 block w-full font-medium"
-                type="email"
-                name="email"
-                id="email"
-                placeholder="johndoe@email.com"
-                required
-              />
-            </fieldset>
+          <fieldset>
+            <label htmlFor="email" className="text-sm font-medium text-text">
+              Work email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              className="input-field mt-1"
+              placeholder="jane@company.com"
+            />
+          </fieldset>
 
-            <Button
-              type={"submit"}
-              className="premium-btn w-full border-0 shadow-none"
-              onClick={(e) => {
-                const button = e.currentTarget;
-                button.textContent = "please wait...";
-
-                setTimeout(() => {
-                  button.textContent = "Submit";
-                  button.classList.add("disabled");
-                }, 3000);
-              }}
-            >
-              Contact me
-            </Button>
-          </form>
+          <Button type="submit" className="btn btn-primary w-full border-0">
+            Send message
+          </Button>
         </div>
-      </Layout>
-    </>
+      </form>
+    </Section>
   );
 }

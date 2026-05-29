@@ -1,91 +1,148 @@
 import { useEffect, useState } from "react";
 import Icon from "./Icon";
 import NavComp from "./NavComp";
+import ThemeToggle from "./ThemeToggle";
+import useActiveSection from "../hooks/useActiveSection";
+import useBodyScrollLock from "../hooks/useBodyScrollLock";
+import { heroLinks } from "../data/snapshot";
 
 const navLinks = [
-  { text: "Home", id: "#home", icon: "home" },
-  { text: "About", id: "#about", icon: "user" },
-  { text: "Projects", id: "#projects", icon: "book" },
-  { text: "Skills", id: "#skills", icon: "rocket" },
-  { text: "Contact Me", id: "#contact", icon: "at" },
+  { text: "Snapshot", id: "#snapshot" },
+  { text: "Projects", id: "#projects" },
+  { text: "Skills", id: "#skills" },
+  { text: "Academic", id: "#academic" },
+  { text: "About", id: "#about" },
+  { text: "Contact", id: "#contact" },
 ];
 
 export default function Navigation() {
-  const [lightMode, setLightMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const active = useActiveSection();
 
-  useEffect(
-    () =>
-      lightMode
-        ? document.documentElement.classList.remove("dark")
-        : document.documentElement.classList.add("dark"),
-    [lightMode],
-  );
+  useBodyScrollLock(menuOpen);
 
   useEffect(() => {
-    const closeMenu = () => setMenuOpen(false);
-    window.addEventListener("resize", closeMenu);
-    return () => window.removeEventListener("resize", closeMenu);
+    const onResize = () => setMenuOpen(false);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  const close = () => setMenuOpen(false);
+
   return (
-    <header className="sticky top-0 z-50 my-4 w-full rounded-xl border border-border bg-elevated/90 p-3 shadow-md backdrop-blur-md">
-      <div className="flex flex-col gap-3 md:flex-row md:items-center">
-        <div className="flex items-center justify-between gap-3 md:flex-1">
-          <h1 className="text-center text-xl font-semibold sm:text-2xl">
-            <a href="/" className="font-display brand-mark text-2xl sm:text-3xl">
-              Nohim.h
-            </a>
-            <sup>
-              <span className="premium-pill ml-1 inline-block rounded-full px-2 py-0.5 text-[0.65rem] font-semibold tracking-wider uppercase">
-                v1.0
-              </span>
-            </sup>
-            <div className="theme-toggle mx-auto mt-2 w-fit">
+    <>
+      <header className="site-header">
+        <div className="site-header-inner">
+          <a href="/" className="site-logo">
+            Nohim Hasitha
+          </a>
+
+          <nav className="desktop-nav" aria-label="Primary">
+            {navLinks.map(({ text, id }) => (
+              <NavComp key={id} text={text} id={id} active={active} />
+            ))}
+          </nav>
+
+          <div className="header-actions">
+            <div className="header-actions-desktop">
+              <ThemeToggle />
+              <a
+                href={heroLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+              >
+                GitHub
+              </a>
+            </div>
+
+            <div className="header-actions-mobile">
+              <ThemeToggle compact />
               <button
                 type="button"
-                className={lightMode ? "active" : ""}
-                onClick={() => setLightMode(true)}
+                className="menu-toggle"
+                aria-expanded={menuOpen}
+                aria-controls="mobile-nav"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                onClick={() => setMenuOpen((o) => !o)}
               >
-                Light
-              </button>
-              <button
-                type="button"
-                className={!lightMode ? "active" : ""}
-                onClick={() => setLightMode(false)}
-              >
-                Dark
+                <Icon name={menuOpen ? "close" : "menu"} />
               </button>
             </div>
-          </h1>
+          </div>
+        </div>
+      </header>
 
+      <div
+        className={`mobile-drawer-backdrop ${menuOpen ? "open" : ""}`}
+        aria-hidden={!menuOpen}
+        onClick={close}
+      />
+
+      <aside
+        id="mobile-nav"
+        className={`mobile-drawer ${menuOpen ? "open" : ""}`}
+        aria-hidden={!menuOpen}
+        inert={!menuOpen || undefined}
+      >
+        <div className="mb-6 flex items-center justify-between">
+          <span className="text-sm font-semibold text-text">Menu</span>
           <button
             type="button"
-            className="rounded-lg border border-border bg-surface p-2 text-gold md:hidden"
-            aria-expanded={menuOpen}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMenuOpen((open) => !open)}
+            className="menu-toggle"
+            aria-label="Close menu"
+            onClick={close}
           >
-            <Icon name={menuOpen ? "close" : "menu"} className="text-2xl" />
+            <Icon name="close" />
           </button>
         </div>
 
-        <nav
-          className={`nav flex w-full flex-col items-stretch gap-3 text-sm font-medium sm:gap-4 sm:text-base md:flex-2 md:flex-row md:justify-center md:py-0 md:text-base ${
-            menuOpen ? "flex" : "hidden md:flex"
-          }`}
-        >
-          {navLinks.map(({ text, id, icon }) => (
+        <p className="drawer-theme-label">Appearance</p>
+        <ThemeToggle />
+
+        <nav className="mt-6 flex flex-col gap-0.5" aria-label="Mobile">
+          <NavComp text="Home" id="#home" active={active} onClick={close} />
+          {navLinks.map(({ text, id }) => (
             <NavComp
               key={id}
               text={text}
               id={id}
-              icon={<Icon name={icon} className="text-gold" />}
-              onClick={() => setMenuOpen(false)}
+              active={active}
+              onClick={close}
             />
           ))}
         </nav>
-      </div>
-    </header>
+
+        <div className="mt-8 flex flex-col gap-2 border-t border-border pt-6">
+          <a
+            href={heroLinks.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline w-full"
+          >
+            GitHub
+          </a>
+          <a
+            href={heroLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline w-full"
+          >
+            LinkedIn
+          </a>
+          <a href={heroLinks.cv} className="btn btn-primary w-full">
+            Download CV
+          </a>
+        </div>
+      </aside>
+    </>
   );
 }

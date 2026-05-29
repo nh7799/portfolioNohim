@@ -18,61 +18,42 @@ export default function PdfViewer({ file }) {
   const pdfFile =
     useMemo(() => {
       if (file) return file;
-
-      if (!hasSupabaseConfig || !supabase) {
-        return null;
-      }
-
+      if (!hasSupabaseConfig || !supabase) return null;
       const { data } = supabase.storage
         .from("cv")
         .getPublicUrl("latest-cv.pdf");
-
       return `${data.publicUrl}?v=${Date.now()}`;
     }, [file]) || "/Nohim-hasitha-cv.pdf";
 
   useEffect(() => {
-    if (!containerRef.current) return;
-
-    const resizeObserver = new ResizeObserver((entries) => {
-      setWidth(entries[0].contentRect.width);
-    });
-
-    resizeObserver.observe(containerRef.current);
-
-    return () => resizeObserver.disconnect();
+    const node = containerRef.current;
+    if (!node) return;
+    const ro = new ResizeObserver(([entry]) =>
+      setWidth(entry.contentRect.width),
+    );
+    ro.observe(node);
+    return () => ro.disconnect();
   }, []);
 
-  function handleLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
-  if (!pdfFile) {
-    return (
-      <div className="w-full rounded-xl border border-red-300 bg-red-50 p-4 text-red-700">
-        CV could not load because Supabase environment variables are missing on
-        Vercel.
-      </div>
-    );
-  }
+  const pageWidth = width > 0 ? Math.min(width - 32, 680) : undefined;
 
   return (
-    <div
-      ref={containerRef}
-      className="card-comp w-full max-w-full overflow-auto rounded-xl p-2 sm:p-4 lg:max-w-3xl"
-    >
+    <div ref={containerRef} className="panel pdf-shell p-4">
       <Document
         file={pdfFile}
-        onLoadSuccess={handleLoadSuccess}
-        loading={<p>Loading CV...</p>}
-        error={<p>Could not load CV. Please try opening it directly.</p>}
+        onLoadSuccess={({ numPages: n }) => setNumPages(n)}
+        loading={<p className="py-6 text-sm text-text-secondary">Loading CV…</p>}
+        error={
+          <p className="py-6 text-sm text-text-secondary">
+            Preview unavailable — use Download CV above.
+          </p>
+        }
       >
-        {width > 0 &&
-          Array.from(new Array(numPages || 0), (_, index) => (
-            <Page
-              key={`page_${index + 1}`}
-              pageNumber={index + 1}
-              width={Math.min(width - 32, 800)}
-            />
+        {pageWidth &&
+          Array.from({ length: numPages || 0 }, (_, i) => (
+            <div key={i} className="mb-4 flex justify-center last:mb-0">
+              <Page pageNumber={i + 1} width={pageWidth} />
+            </div>
           ))}
       </Document>
     </div>

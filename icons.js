@@ -26,6 +26,8 @@ import {
   faArrowAltCircleRight,
   faBars,
   faXmark,
+  faSun,
+  faMoon,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGit,
@@ -55,4 +57,6 @@ export const icons = {
   plus: faPlus,
   menu: faBars,
   close: faXmark,
+  sun: faSun,
+  moon: faMoon,
 };
