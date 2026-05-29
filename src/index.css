@@ -5,6 +5,12 @@ body {
   margin: 0;
 }
 
+html {
+  scroll-padding-top: calc(
+    var(--header-height) + env(safe-area-inset-top, 0px) + 1rem
+  );
+}
+
 .skip-link {
   position: absolute;
   left: -9999px;

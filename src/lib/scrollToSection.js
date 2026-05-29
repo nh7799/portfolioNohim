@@ -3,21 +3,40 @@ function getHeaderOffset() {
   return (header?.offsetHeight ?? 56) + 8;
 }
 
+function getScrollRoot() {
+  return document.scrollingElement ?? document.documentElement;
+}
+
 export function scrollToSection(sectionId, { behavior = "smooth" } = {}) {
   const id = String(sectionId).replace(/^#/, "");
   const el = document.getElementById(id);
   if (!el) return false;
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const top =
-    el.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
+  const scrollBehavior = reduced ? "auto" : behavior;
+  const root = getScrollRoot();
+  const targetTop =
+    el.getBoundingClientRect().top + root.scrollTop - getHeaderOffset();
 
-  window.scrollTo({
-    top: Math.max(0, top),
-    behavior: reduced ? "auto" : behavior,
+  root.scrollTo({
+    top: Math.max(0, targetTop),
+    behavior: scrollBehavior,
   });
 
-  history.replaceState?.(null, "", `#${id}`);
+  // Fine-tune after layout (fixed header / iOS scroll root quirks)
+  requestAnimationFrame(() => {
+    const offset = el.getBoundingClientRect().top - getHeaderOffset();
+    if (Math.abs(offset) > 4) {
+      root.scrollBy({ top: offset, behavior: scrollBehavior });
+    }
+  });
+
+  try {
+    history.replaceState(null, "", `#${id}`);
+  } catch {
+    window.location.hash = id;
+  }
+
   return true;
 }
 

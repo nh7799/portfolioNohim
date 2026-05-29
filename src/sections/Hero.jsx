@@ -1,5 +1,5 @@
 import { heroLinks } from "../data/snapshot";
-import { scrollToSection } from "../lib/scrollToSection";
+import ScrollLink from "../components/ScrollLink";
 
 export default function Hero() {
   return (
@@ -19,16 +19,9 @@ export default function Hero() {
           </p>
 
           <div className="btn-row mt-8">
-            <a
-              href="#projects"
-              className="btn btn-primary"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("projects");
-              }}
-            >
+            <ScrollLink to="projects" className="btn btn-primary">
               View projects
-            </a>
+            </ScrollLink>
             <a href={heroLinks.cv} className="btn btn-outline">
               Download CV
             </a>
