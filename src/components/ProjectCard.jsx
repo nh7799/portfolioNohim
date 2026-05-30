@@ -1,3 +1,5 @@
+import LazyImage from "./LazyImage";
+
 export default function ProjectCard({
   title,
   problem,
@@ -11,12 +13,10 @@ export default function ProjectCard({
     <article className="project-card">
       {imageUrl && (
         <div className="project-card-media studio-photo">
-          <img
+          <LazyImage
             src={imageUrl}
             alt=""
             className="project-thumb"
-            loading="lazy"
-            decoding="async"
           />
         </div>
       )}

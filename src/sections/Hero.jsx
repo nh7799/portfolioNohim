@@ -1,5 +1,7 @@
 import { heroLinks } from "../data/snapshot";
 import ScrollLink from "../components/ScrollLink";
+import LazyImage from "../components/LazyImage";
+import profilePhoto from "../assets/IMG_0885.jpeg";
 
 export default function Hero() {
   return (
@@ -37,11 +39,14 @@ export default function Hero() {
         </div>
 
         <aside className="hero-aside">
-          <div
-            className="profile-photo studio-photo"
-            role="img"
-            aria-label="Portrait of Nohim Hasitha"
-          />
+          <div className="profile-photo studio-photo">
+            <LazyImage
+              src={profilePhoto}
+              alt="Portrait of Nohim Hasitha"
+              className="profile-photo-img"
+              eager
+            />
+          </div>
         </aside>
       </div>
     </section>
