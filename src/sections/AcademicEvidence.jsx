@@ -1,4 +1,5 @@
 import DownloadCVButton from "../components/DownloadCVButton";
+import GridWorldDemo from "../components/GridWorldDemo";
 import PdfViewer from "../components/PdfViewer";
 import Section from "../components/Section";
 import { moduleAchievements } from "../data/achievements";
@@ -40,6 +41,18 @@ export default function AcademicEvidence() {
               </article>
             ),
           )}
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <h3 className="achievements-heading">Applied AI — grid world</h3>
+        <p className="achievements-intro">
+          From the Artificial Intelligence module (84% final exam). Compare how
+          random, ethical, and exploitative agents behave on the same
+          reversible environment.
+        </p>
+        <div className="mt-5">
+          <GridWorldDemo />
         </div>
       </div>
 

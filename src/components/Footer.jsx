@@ -1,4 +1,5 @@
 import { heroLinks } from "../data/snapshot";
+import CVLink from "./CVLink";
 
 export default function Footer() {
   return (
@@ -12,7 +13,7 @@ export default function Footer() {
         {" · "}
         <a href={heroLinks.linkedin}>LinkedIn</a>
         {" · "}
-        <a href={heroLinks.cv}>CV (PDF)</a>
+        <CVLink>CV (PDF)</CVLink>
       </p>
       <p className="mt-4">© {new Date().getFullYear()} Nohim Hasitha.<br></br> All rights reserved.</p>
     </footer>

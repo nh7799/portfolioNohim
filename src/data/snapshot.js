@@ -35,5 +35,4 @@ export const heroLinks = {
   github: "https://github.com/nh7799",
   linkedin:
     "https://www.linkedin.com/in/nohim-hasitha-weedagama-arachchi/",
-  cv: "/Nohim-hasitha-cv.pdf",
 };

@@ -6,6 +6,7 @@ import useActiveSection from "../hooks/useActiveSection";
 import useBodyScrollLock from "../hooks/useBodyScrollLock";
 import { heroLinks } from "../data/snapshot";
 import { scrollToSection } from "../lib/scrollToSection";
+import CVLink from "./CVLink";
 
 const navLinks = [
   { text: "Snapshot", id: "#snapshot" },
@@ -43,7 +44,7 @@ export default function Navigation() {
       <header className="site-header">
         <div className="site-header-inner">
           <a
-            href="#home"
+            href="/"
             className="site-logo"
             title="Nohim Hasitha"
             onClick={(e) => {
@@ -150,9 +151,9 @@ export default function Navigation() {
           >
             LinkedIn
           </a>
-          <a href={heroLinks.cv} className="btn btn-primary w-full">
+          <CVLink asDownload className="btn btn-primary w-full">
             Download CV
-          </a>
+          </CVLink>
         </div>
       </aside>
     </>

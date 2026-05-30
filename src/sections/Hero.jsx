@@ -1,6 +1,7 @@
 import { heroLinks } from "../data/snapshot";
 import ScrollLink from "../components/ScrollLink";
 import LazyImage from "../components/LazyImage";
+import CVLink from "../components/CVLink";
 import profilePhoto from "../assets/IMG_0885.jpeg";
 
 export default function Hero() {
@@ -24,9 +25,9 @@ export default function Hero() {
             <ScrollLink to="projects" className="btn btn-primary">
               View projects
             </ScrollLink>
-            <a href={heroLinks.cv} className="btn btn-outline">
+            <CVLink asDownload className="btn btn-outline">
               Download CV
-            </a>
+            </CVLink>
             <a
               href={heroLinks.linkedin}
               target="_blank"
