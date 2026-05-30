@@ -59,7 +59,8 @@ export default function AcademicEvidence() {
       <div className="mt-10">
         <h3 className="text-sm font-semibold text-text">CV preview</h3>
         <p className="mt-1 text-sm text-text-secondary">
-          Download for applications. Preview loads below when available.
+          Download for applications. Preview loads below when available.<br></br>
+          <b><i>please note that the sensitive information are not publicly visible and available upon request.</i></b>
         </p>
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
           <DownloadCVButton />

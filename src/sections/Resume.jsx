@@ -9,7 +9,7 @@ export default function Resume() {
       id="resume"
       eyebrow="Resume"
       title="CV"
-      description="Download or preview my latest CV. Updated for placement applications.<b>please note that the sensitive information are not publicly visible and available upon request. "
+      description="Download or preview my latest CV. Updated for placement applications."
     >
       <Reveal>
         <div className="flex flex-col gap-6 sm:gap-8">
