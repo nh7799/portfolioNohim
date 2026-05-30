@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import {
-  LOCAL_CV_PATH,
-  resolveCvUrl,
-} from "../lib/cvUrl";
+import { LOCAL_CV_PATH, resolveCvPreviewUrl } from "../lib/cvUrl";
 
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -25,33 +22,35 @@ export default function PdfViewer({ file }) {
     let cancelled = false;
 
     async function loadPreview() {
+      setNumPages(null);
+      setPreviewFailed(false);
+
       if (file) {
         setPdfFile(file);
-        setPreviewFailed(false);
         setUsingFallback(false);
         return;
       }
 
       try {
-        const baseUrl = await resolveCvUrl();
-        const previewUrl = baseUrl.startsWith("/")
-          ? `${baseUrl}?v=${Date.now()}`
-          : `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}v=${Date.now()}`;
+        const previewUrl = await resolveCvPreviewUrl({
+          forceRefresh: true,
+        });
 
         if (!cancelled) {
           setPdfFile(previewUrl);
-          setPreviewFailed(false);
-          setUsingFallback(baseUrl === LOCAL_CV_PATH);
+          setUsingFallback(previewUrl.includes(LOCAL_CV_PATH));
         }
       } catch {
         if (!cancelled) {
-          setPdfFile(`${LOCAL_CV_PATH}?v=${Date.now()}`);
-          setUsingFallback(true);
+          setPdfFile(null);
+          setUsingFallback(false);
+          setPreviewFailed(true);
         }
       }
     }
 
     loadPreview();
+
     return () => {
       cancelled = true;
     };
@@ -60,20 +59,18 @@ export default function PdfViewer({ file }) {
   useEffect(() => {
     const node = containerRef.current;
     if (!node) return;
+
     const ro = new ResizeObserver(([entry]) =>
       setWidth(entry.contentRect.width),
     );
+
     ro.observe(node);
+
     return () => ro.disconnect();
   }, []);
 
-  async function handleDocumentError() {
-    if (!usingFallback && !file) {
-      setUsingFallback(true);
-      setPdfFile(`${LOCAL_CV_PATH}?v=${Date.now()}`);
-      return;
-    }
-
+  function handleDocumentError(error) {
+    console.error("CV preview failed:", error);
     setPreviewFailed(true);
   }
 
@@ -85,10 +82,16 @@ export default function PdfViewer({ file }) {
         <p className="py-6 text-sm text-text-secondary">
           Preview unavailable — use Download CV above.
         </p>
+      ) : !pdfFile ? (
+        <p className="py-6 text-sm text-text-secondary">Loading CV…</p>
       ) : (
         <Document
+          key={pdfFile}
           file={pdfFile}
-          onLoadSuccess={({ numPages: n }) => setNumPages(n)}
+          onLoadSuccess={({ numPages: n }) => {
+            setNumPages(n);
+            setPreviewFailed(false);
+          }}
           onLoadError={handleDocumentError}
           loading={<p className="py-6 text-sm text-text-secondary">Loading CV…</p>}
           error={
@@ -100,7 +103,7 @@ export default function PdfViewer({ file }) {
           {pageWidth &&
             pdfFile &&
             Array.from({ length: numPages || 0 }, (_, i) => (
-              <div key={i} className="mb-4 flex justify-center last:mb-0">
+              <div key={`${pdfFile}-${i}`} className="mb-4 flex justify-center last:mb-0">
                 <Page pageNumber={i + 1} width={pageWidth} />
               </div>
             ))}
