@@ -11,7 +11,7 @@ export default function AcademicEvidence() {
       id="academic"
       label="Education"
       title="Academic evidence"
-      intro="Degree context and where to verify qualifications. CV includes full history."
+      intro="My current academic status, work and willingness to relocate to the UK for a placement year"
     >
       <div className="panel px-5 sm:px-6">
         <dl>

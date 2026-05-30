@@ -6,7 +6,7 @@ export default function About() {
       id="about"
       label="Background"
       title="About"
-      intro="Short context on how I work — details are in projects and CV."
+      intro="An in depth look at my background and experience and why hiring me would be a good decision, considering the willingness for continuos learning and development and high level of attention to detail and qualit. bundled with an attitude to value project completion over numerical grades."
     >
       <div className="prose-width space-y-4 text-[0.9375rem] leading-relaxed text-text-secondary">
         <p>

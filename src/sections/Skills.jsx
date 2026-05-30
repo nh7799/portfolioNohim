@@ -7,7 +7,7 @@ export default function Skills() {
       id="skills"
       label="Technical"
       title="Skills"
-      intro="Grouped by area. Depth comes from projects and coursework — see GitHub and CV for detail."
+      intro="during the course of my studies, I have gained a wide range of skills in the field of computer science. apart from university work i have also worked on a number of personal projects to strengthen my skills and knowledge. these are the summary of my skills. categorised by criteria"
     >
       <div className="skills-grid">
         {skillGroups.map(({ title, items }) => (
