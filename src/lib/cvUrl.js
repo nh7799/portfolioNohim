@@ -22,14 +22,14 @@ export const CV_STORAGE_OBJECT = "latest-cv.pdf";
 export const CV_DOWNLOAD_NAME = "Nohim-Hasitha-CV.pdf";
 
 /**
- * Only cache the working remote URL.
- * Do NOT permanently cache the local fallback.
+ * Do not cache aggressively.
+ * The issue you are seeing is usually caused by old preview/cache behaviour.
  */
 let cachedRemoteUrl = null;
-let lastRemoteCheckAt = 0;
+let cachedRemoteUrlAt = 0;
 let resolvePromise = null;
 
-const REMOTE_RECHECK_INTERVAL_MS = 30 * 1000;
+const REMOTE_URL_CACHE_MS = 10 * 1000;
 
 export function getSupabaseCvPublicUrl() {
   if (!hasSupabaseConfig || !supabase) return null;
@@ -41,9 +41,39 @@ export function getSupabaseCvPublicUrl() {
   return data?.publicUrl || null;
 }
 
-function withCacheBuster(url) {
+/**
+ * Signed URLs are better for avoiding stale previews because
+ * they generate a fresh URL instead of always using the exact same public URL.
+ */
+async function getSupabaseCvSignedUrl() {
+  if (!hasSupabaseConfig || !supabase) return null;
+
+  try {
+    const { data, error } = await supabase.storage
+      .from(CV_STORAGE_BUCKET)
+      .createSignedUrl(CV_STORAGE_OBJECT, 60);
+
+    if (error) return null;
+
+    return data?.signedUrl || null;
+  } catch {
+    return null;
+  }
+}
+
+async function getBestSupabaseCvUrl() {
+  const signedUrl = await getSupabaseCvSignedUrl();
+
+  if (signedUrl) {
+    return signedUrl;
+  }
+
+  return getSupabaseCvPublicUrl();
+}
+
+function withCacheBuster(url, key = "v") {
   const separator = url.includes("?") ? "&" : "?";
-  return `${url}${separator}v=${Date.now()}`;
+  return `${url}${separator}${key}=${Date.now()}`;
 }
 
 async function isPdfBlob(blob) {
@@ -59,104 +89,8 @@ async function isPdfBlob(blob) {
   );
 }
 
-async function isReachablePdf(url) {
-  try {
-    const response = await fetch(withCacheBuster(url), {
-      method: "GET",
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      return false;
-    }
-
-    const blob = await response.blob();
-    const contentType = response.headers.get("content-type") ?? "";
-
-    if (
-      contentType.includes("application/pdf") ||
-      contentType.includes("application/octet-stream")
-    ) {
-      return true;
-    }
-
-    return await isPdfBlob(blob);
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Resolve CV URL:
- * 1. Check Supabase remote CV
- * 2. Use remote if available
- * 3. Otherwise fallback to local PDF
- *
- * Important:
- * Local fallback is NOT permanently cached.
- */
-export async function resolveCvUrl({ forceRefresh = false } = {}) {
-  const now = Date.now();
-
-  if (
-    !forceRefresh &&
-    cachedRemoteUrl &&
-    now - lastRemoteCheckAt < REMOTE_RECHECK_INTERVAL_MS
-  ) {
-    return cachedRemoteUrl;
-  }
-
-  if (!forceRefresh && resolvePromise) {
-    return resolvePromise;
-  }
-
-  resolvePromise = (async () => {
-    const supabaseUrl = getSupabaseCvPublicUrl();
-
-    if (supabaseUrl) {
-      const remoteWorks = await isReachablePdf(supabaseUrl);
-
-      if (remoteWorks) {
-        cachedRemoteUrl = supabaseUrl;
-        lastRemoteCheckAt = Date.now();
-        return supabaseUrl;
-      }
-    }
-
-    cachedRemoteUrl = null;
-    lastRemoteCheckAt = Date.now();
-
-    return LOCAL_CV_PATH;
-  })();
-
-  try {
-    return await resolvePromise;
-  } finally {
-    resolvePromise = null;
-  }
-}
-
-export function invalidateCvUrlCache() {
-  cachedRemoteUrl = null;
-  lastRemoteCheckAt = 0;
-  resolvePromise = null;
-}
-
-function triggerBlobDownload(blob) {
-  const blobUrl = window.URL.createObjectURL(blob);
-
-  const link = document.createElement("a");
-  link.href = blobUrl;
-  link.download = CV_DOWNLOAD_NAME;
-  document.body.appendChild(link);
-  link.click();
-
-  link.remove();
-  window.URL.revokeObjectURL(blobUrl);
-}
-
 async function fetchPdfBlob(url) {
-  const response = await fetch(withCacheBuster(url), {
+  const response = await fetch(withCacheBuster(url, "download"), {
     method: "GET",
     cache: "no-store",
   });
@@ -185,10 +119,91 @@ async function fetchPdfBlob(url) {
 }
 
 /**
+ * Resolve CV URL:
+ * 1. Prefer Supabase
+ * 2. Only use local fallback if Supabase URL cannot be created
+ *
+ * Important:
+ * This version does NOT fetch-check Supabase before previewing,
+ * because fetch checks can fail and wrongly force the site back to local.
+ */
+export async function resolveCvUrl({ forceRefresh = false } = {}) {
+  const now = Date.now();
+
+  if (
+    !forceRefresh &&
+    cachedRemoteUrl &&
+    now - cachedRemoteUrlAt < REMOTE_URL_CACHE_MS
+  ) {
+    return cachedRemoteUrl;
+  }
+
+  if (!forceRefresh && resolvePromise) {
+    return resolvePromise;
+  }
+
+  resolvePromise = (async () => {
+    const supabaseUrl = await getBestSupabaseCvUrl();
+
+    if (supabaseUrl) {
+      cachedRemoteUrl = supabaseUrl;
+      cachedRemoteUrlAt = Date.now();
+      return supabaseUrl;
+    }
+
+    cachedRemoteUrl = null;
+    cachedRemoteUrlAt = 0;
+
+    return LOCAL_CV_PATH;
+  })();
+
+  try {
+    return await resolvePromise;
+  } finally {
+    resolvePromise = null;
+  }
+}
+
+export function invalidateCvUrlCache() {
+  cachedRemoteUrl = null;
+  cachedRemoteUrlAt = 0;
+  resolvePromise = null;
+}
+
+function triggerBlobDownload(blob) {
+  const blobUrl = window.URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = blobUrl;
+  link.download = CV_DOWNLOAD_NAME;
+  document.body.appendChild(link);
+  link.click();
+
+  link.remove();
+  window.URL.revokeObjectURL(blobUrl);
+}
+
+function triggerDirectDownload(url) {
+  const link = document.createElement("a");
+  link.href = withCacheBuster(url, "direct");
+  link.download = CV_DOWNLOAD_NAME;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+
+/**
  * Download CV:
- * Always force-check Supabase when the user clicks download.
+ * 1. Try fresh Supabase URL
+ * 2. Try blob download
+ * 3. If browser blocks blob/CORS, open direct Supabase URL
+ * 4. Final fallback: local PDF
  */
 export async function downloadCv() {
+  invalidateCvUrlCache();
+
   const primaryUrl = await resolveCvUrl({ forceRefresh: true });
 
   try {
@@ -196,12 +211,25 @@ export async function downloadCv() {
     triggerBlobDownload(blob);
     return primaryUrl;
   } catch {
+    if (primaryUrl !== LOCAL_CV_PATH) {
+      try {
+        triggerDirectDownload(primaryUrl);
+        return primaryUrl;
+      } catch {
+        // Continue to local fallback
+      }
+    }
+
     try {
       const localBlob = await fetchPdfBlob(LOCAL_CV_PATH);
       triggerBlobDownload(localBlob);
       return LOCAL_CV_PATH;
     } catch {
-      window.open(LOCAL_CV_PATH, "_blank", "noopener,noreferrer");
+      window.open(
+        withCacheBuster(LOCAL_CV_PATH, "fallback"),
+        "_blank",
+        "noopener,noreferrer"
+      );
       return LOCAL_CV_PATH;
     }
   }
@@ -209,8 +237,10 @@ export async function downloadCv() {
 
 /**
  * URL suitable for iframe / react-pdf preview.
+ *
+ * This always forces a fresh preview URL.
  */
-export async function resolveCvPreviewUrl({ forceRefresh = false } = {}) {
+export async function resolveCvPreviewUrl({ forceRefresh = true } = {}) {
   const url = await resolveCvUrl({ forceRefresh });
-  return withCacheBuster(url);
+  return withCacheBuster(url, "preview");
 }
