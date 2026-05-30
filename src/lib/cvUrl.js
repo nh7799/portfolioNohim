@@ -1,12 +1,9 @@
 import { hasSupabaseConfig, supabase } from "./supabaseClient";
 
 /**
- * IMPORTANT:
- * Put your PDF here:
+ * Local fallback file must be here:
  *
  * public/Nohim-hasitha-cv.pdf
- *
- * Do NOT put it inside src/assets if you want this direct URL to work on Vercel.
  */
 const PUBLIC_BASE_URL = import.meta.env.BASE_URL || "/";
 
@@ -24,13 +21,15 @@ export const CV_STORAGE_BUCKET = "cv";
 export const CV_STORAGE_OBJECT = "latest-cv.pdf";
 export const CV_DOWNLOAD_NAME = "Nohim-Hasitha-CV.pdf";
 
-let cachedUrl = null;
+/**
+ * Only cache the working remote URL.
+ * Do NOT permanently cache the local fallback.
+ */
+let cachedRemoteUrl = null;
+let lastRemoteCheckAt = 0;
 let resolvePromise = null;
-let cacheVersion = Date.now();
 
-function refreshCacheVersion() {
-  cacheVersion = Date.now();
-}
+const REMOTE_RECHECK_INTERVAL_MS = 30 * 1000;
 
 export function getSupabaseCvPublicUrl() {
   if (!hasSupabaseConfig || !supabase) return null;
@@ -44,7 +43,7 @@ export function getSupabaseCvPublicUrl() {
 
 function withCacheBuster(url) {
   const separator = url.includes("?") ? "&" : "?";
-  return `${url}${separator}v=${cacheVersion}`;
+  return `${url}${separator}v=${Date.now()}`;
 }
 
 async function isPdfBlob(blob) {
@@ -53,10 +52,10 @@ async function isPdfBlob(blob) {
 
   return (
     bytes.length >= 4 &&
-    bytes[0] === 0x25 && // %
-    bytes[1] === 0x50 && // P
-    bytes[2] === 0x44 && // D
-    bytes[3] === 0x46    // F
+    bytes[0] === 0x25 &&
+    bytes[1] === 0x50 &&
+    bytes[2] === 0x44 &&
+    bytes[3] === 0x46
   );
 }
 
@@ -72,7 +71,6 @@ async function isReachablePdf(url) {
     }
 
     const blob = await response.blob();
-
     const contentType = response.headers.get("content-type") ?? "";
 
     if (
@@ -90,16 +88,22 @@ async function isReachablePdf(url) {
 
 /**
  * Resolve CV URL:
- * 1. Use Supabase public URL if available and valid
- * 2. Otherwise fallback to the local PDF inside /public
+ * 1. Check Supabase remote CV
+ * 2. Use remote if available
+ * 3. Otherwise fallback to local PDF
+ *
+ * Important:
+ * Local fallback is NOT permanently cached.
  */
 export async function resolveCvUrl({ forceRefresh = false } = {}) {
-  if (forceRefresh) {
-    invalidateCvUrlCache();
-  }
+  const now = Date.now();
 
-  if (!forceRefresh && cachedUrl) {
-    return cachedUrl;
+  if (
+    !forceRefresh &&
+    cachedRemoteUrl &&
+    now - lastRemoteCheckAt < REMOTE_RECHECK_INTERVAL_MS
+  ) {
+    return cachedRemoteUrl;
   }
 
   if (!forceRefresh && resolvePromise) {
@@ -110,15 +114,18 @@ export async function resolveCvUrl({ forceRefresh = false } = {}) {
     const supabaseUrl = getSupabaseCvPublicUrl();
 
     if (supabaseUrl) {
-      const supabaseWorks = await isReachablePdf(supabaseUrl);
+      const remoteWorks = await isReachablePdf(supabaseUrl);
 
-      if (supabaseWorks) {
-        cachedUrl = supabaseUrl;
+      if (remoteWorks) {
+        cachedRemoteUrl = supabaseUrl;
+        lastRemoteCheckAt = Date.now();
         return supabaseUrl;
       }
     }
 
-    cachedUrl = LOCAL_CV_PATH;
+    cachedRemoteUrl = null;
+    lastRemoteCheckAt = Date.now();
+
     return LOCAL_CV_PATH;
   })();
 
@@ -130,9 +137,9 @@ export async function resolveCvUrl({ forceRefresh = false } = {}) {
 }
 
 export function invalidateCvUrlCache() {
-  cachedUrl = null;
+  cachedRemoteUrl = null;
+  lastRemoteCheckAt = 0;
   resolvePromise = null;
-  refreshCacheVersion();
 }
 
 function triggerBlobDownload(blob) {
@@ -159,7 +166,6 @@ async function fetchPdfBlob(url) {
   }
 
   const blob = await response.blob();
-
   const contentType = response.headers.get("content-type") ?? "";
 
   if (
@@ -180,42 +186,29 @@ async function fetchPdfBlob(url) {
 
 /**
  * Download CV:
- * 1. Try resolved URL
- * 2. If Supabase fails, fallback to local public PDF
- * 3. If download fails, open the local PDF in a new tab
+ * Always force-check Supabase when the user clicks download.
  */
 export async function downloadCv() {
-  const primaryUrl = await resolveCvUrl();
+  const primaryUrl = await resolveCvUrl({ forceRefresh: true });
 
   try {
     const blob = await fetchPdfBlob(primaryUrl);
     triggerBlobDownload(blob);
     return primaryUrl;
   } catch {
-    if (primaryUrl !== LOCAL_CV_PATH) {
-      invalidateCvUrlCache();
-
-      try {
-        const localBlob = await fetchPdfBlob(LOCAL_CV_PATH);
-        cachedUrl = LOCAL_CV_PATH;
-        triggerBlobDownload(localBlob);
-        return LOCAL_CV_PATH;
-      } catch {
-        window.open(LOCAL_CV_PATH, "_blank", "noopener,noreferrer");
-        return LOCAL_CV_PATH;
-      }
+    try {
+      const localBlob = await fetchPdfBlob(LOCAL_CV_PATH);
+      triggerBlobDownload(localBlob);
+      return LOCAL_CV_PATH;
+    } catch {
+      window.open(LOCAL_CV_PATH, "_blank", "noopener,noreferrer");
+      return LOCAL_CV_PATH;
     }
-
-    window.open(LOCAL_CV_PATH, "_blank", "noopener,noreferrer");
-    return LOCAL_CV_PATH;
   }
 }
 
 /**
  * URL suitable for iframe / react-pdf preview.
- *
- * This returns a cache-busted URL, but the cache version is stable
- * until invalidateCvUrlCache() or forceRefresh is used.
  */
 export async function resolveCvPreviewUrl({ forceRefresh = false } = {}) {
   const url = await resolveCvUrl({ forceRefresh });

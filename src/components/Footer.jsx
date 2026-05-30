@@ -12,8 +12,7 @@ export default function Footer() {
 
     async function loadCvUrl() {
       try {
-        const resolvedUrl = await resolveCvPreviewUrl();
-
+        const resolvedUrl = await resolveCvPreviewUrl({ forceRefresh: true });
         if (isMounted && resolvedUrl) {
           setCvUrl(resolvedUrl);
         }
