@@ -44,6 +44,7 @@ export default function Hero() {
               src={profilePhoto}
               alt="Portrait of Nohim Hasitha"
               className="profile-photo-img"
+              wrapperClassName="profile-photo-wrap"
               eager
             />
           </div>

@@ -17,6 +17,7 @@ export default function ProjectCard({
             src={imageUrl}
             alt=""
             className="project-thumb"
+            wrapperClassName="project-thumb-wrap"
           />
         </div>
       )}

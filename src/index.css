@@ -619,22 +619,106 @@ button {
   isolation: isolate;
 }
 
-.studio-photo > .project-thumb,
-.studio-photo > img {
+.studio-photo .lazy-image {
   filter: var(--studio-filter);
+}
+
+/* ——— Lazy image loading ——— */
+.lazy-image-wrap {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.lazy-image-shimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    var(--surface) 0%,
+    color-mix(in srgb, var(--border) 35%, var(--surface)) 45%,
+    var(--surface) 90%
+  );
+  background-size: 220% 100%;
+  transition: opacity 0.35s ease;
+}
+
+.lazy-image-wrap--loading .lazy-image-shimmer {
+  opacity: 1;
+  animation: lazy-shimmer 1.35s ease-in-out infinite;
+}
+
+.lazy-image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.lazy-image--loaded {
+  opacity: 1;
+}
+
+@keyframes lazy-shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lazy-image-shimmer {
+    animation: none;
+  }
+
+  .lazy-image-wrap--loading .lazy-image-shimmer {
+    opacity: 0.65;
+  }
+
+  .lazy-image {
+    transition: none;
+  }
+
+  .lazy-image--loaded {
+    opacity: 1;
+  }
 }
 
 .profile-photo.studio-photo {
   background: var(--surface);
 }
 
-.profile-photo-img {
+.profile-photo-wrap {
   position: absolute;
   inset: 0;
+}
+
+.profile-photo-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
+}
+
+.project-thumb-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: clamp(9.5rem, 32vw, 12.5rem);
+}
+
+.project-thumb {
+  object-fit: cover;
+  object-position: center;
 }
 
 .studio-photo::after {
@@ -659,16 +743,6 @@ button {
     );
 }
 
-.project-thumb {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: clamp(9.5rem, 32vw, 12.5rem);
-  object-fit: cover;
-  object-position: center;
-  background: var(--surface);
-}
-
 @media (min-width: 640px) {
   .project-card {
     display: grid;
@@ -686,8 +760,7 @@ button {
     border-right: 1px solid var(--border);
   }
 
-  .project-thumb {
-    width: 100%;
+  .project-thumb-wrap {
     height: 100%;
     min-height: 100%;
     max-height: none;
