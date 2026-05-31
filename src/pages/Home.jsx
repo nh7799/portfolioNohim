@@ -7,6 +7,7 @@ import Projects from "../sections/Projects";
 import RecruiterSnapshot from "../sections/RecruiterSnapshot";
 import Skills from "../sections/Skills";
 import { scrollToSection } from "../lib/scrollToSection";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Home() {
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function Home() {
 
   return (
     <main>
+      <Analytics/>
       <Hero />
       <RecruiterSnapshot />
       <Projects />
