@@ -5,6 +5,8 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import { ThemeProvider } from "./hooks/useTheme.jsx";
 import { scrollToSection } from "./lib/scrollToSection";
+import { Analytics } from "@vercel/analytics/next"
+
 
 function SkipToContent() {
   return (
@@ -31,6 +33,7 @@ function App() {
           <Navigation />
           <div id="main" className="page-inner page-main" tabIndex={-1}>
             <Routes>
+              <Analytics></Analytics>
               <Route path="/" element={<Home />} />
             </Routes>
             <Footer />
