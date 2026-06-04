@@ -8,6 +8,7 @@ import RecruiterSnapshot from "../sections/RecruiterSnapshot";
 import Skills from "../sections/Skills";
 import { scrollToSection } from "../lib/scrollToSection";
 import { Analytics } from "@vercel/analytics/react";
+import Certificates from "../sections/Certificates";
 
 export default function Home() {
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Home() {
       <Projects />
       <Skills />
       <AcademicEvidence />
+      <Certificates/>
       <About />
       <Contact />
     </main>

@@ -16,6 +16,7 @@ function joinPublicPath(filename) {
 }
 
 export const LOCAL_CV_PATH = joinPublicPath("Nohim-hasitha-cv.pdf");
+export const LOCAL_CERTIFICATES_PATH = joinPublicPath("software_engineer certificate.pdf");
 
 export const CV_STORAGE_BUCKET = "cv";
 export const CV_STORAGE_OBJECT = "latest-cv.pdf";
