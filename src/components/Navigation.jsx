@@ -7,6 +7,7 @@ import useBodyScrollLock from "../hooks/useBodyScrollLock";
 import { heroLinks } from "../data/snapshot";
 import { scrollToSection } from "../lib/scrollToSection";
 import CVLink from "./CVLink";
+import badge from "../assets/oracle-badge.jpeg";
 
 const navLinks = [
   { text: "Snapshot", id: "#snapshot" },
@@ -46,7 +47,7 @@ export default function Navigation() {
         <div className="site-header-inner">
           <a
             href="/"
-            className="site-logo"
+            className="site-logo flex"
             title="Nohim Hasitha"
             onClick={(e) => {
               e.preventDefault();
@@ -54,6 +55,7 @@ export default function Navigation() {
             }}
           >
             Nohim Hasitha
+            {/* <img src={badge} alt="Nohim Hasitha" className="w-20 h-20" /> */}
           </a>
 
           <nav className="desktop-nav" aria-label="Primary">
